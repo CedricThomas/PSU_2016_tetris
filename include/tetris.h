@@ -1,11 +1,17 @@
 /*
 ** tetris.h for tetris in /home/cedric/delivery/PSU/PSU_2016_tetris
-** 
-** Made by 
+**
+** Made by
 ** Login   <cedric.thomas@epitech.eu>
+<<<<<<< HEAD
 ** 
 ** Started on  Mon Feb 20 20:44:55 2017 
 ** Last update Wed Feb 22 09:14:21 2017 
+=======
+**
+** Started on  Mon Feb 20 20:44:55 2017
+** Last update Wed Feb 22 00:59:51 2017
+>>>>>>> 9cb9928a5eb8d7895dadcee883d50c18138c6b78
 */
 #ifndef TETRIS_H_
 # define TETRIS_H_
@@ -75,6 +81,18 @@ typedef struct		s_game_rules
 
 int	help(int jump);
 
+
+/*
+** DEBUG_MODE/debug.c
+*/
+
+int	debug_mode(t_tetrimino *form_list, t_game_rules *my_rules);
+
+/*
+** GAME
+*/
+
+int	the_game(t_game_rules *my_rules, t_tetrimino *form_list);
 
 /*
 **PARSE

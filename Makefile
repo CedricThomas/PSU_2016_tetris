@@ -1,11 +1,11 @@
 ##
 ## Makefile for Makefile in /home/cedric/lib
-## 
+##
 ## Made by Cédric Thomas
 ## Login   <cedric@epitech.net>
-## 
+##
 ## Started on  Sat Oct 22 10:37:32 2016 Cédric Thomas
-## Last update Tue Feb 21 21:07:46 2017 
+## Last update Wed Feb 22 09:19:05 2017 Maxime Jenny
 ##
 
 SRC	=	main.c				\
@@ -16,6 +16,8 @@ SRC	=	main.c				\
 		parse/args/prepare.c		\
 		parse/args/type.c		\
 		parse/tertrimino/tetris.c	\
+		debug_mode/debug.c		\
+		game/the_game.c
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -27,7 +29,7 @@ LIB	=	-lmy -lmyprintf -lgnl
 
 INCLUDE	=	-I./include/
 
-CFLAGS	+=	 $(INCLUDE) -g	
+CFLAGS	+=	 $(INCLUDE) -g
 
 
 all:		$(NAME)

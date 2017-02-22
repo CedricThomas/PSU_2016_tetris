@@ -1,12 +1,13 @@
 /*
-** main.c for main.c in /home/cedric/delivery/ex
+** main.c for tetris in /home/cedric/delivery/PSU/PSU_2016_tetris
 ** 
-** Made by Cédric Thomas
-** Login   <cedric@epitech.net>
+** Made by 
+** Login   <cedric.thomas@epitech.eu>
 ** 
-** Started on  Sat Oct 22 10:31:05 2016 Cédric Thomas
-** Last update Wed Feb 22 09:42:16 2017 
+** Started on  Wed Feb 22 09:46:31 2017 
+** Last update Wed Feb 22 09:46:35 2017 
 */
+
 #include <stdlib.h>
 #include "tetris.h"
 #include "my.h"
@@ -59,6 +60,10 @@ int		main(int ac, char **av)
     return (84);
   if (get_form(&form_list) == 84)
     return (84);
+  //insérer ici la fonction de gestion du jeu.
+  if (my_rules.debug == 1)
+    debug_mode(form_list, &my_rules);
+  //the_game(&my_rules, form_list);
   my_free_rule(&my_rules);
   free(form_list);
   return (0);
