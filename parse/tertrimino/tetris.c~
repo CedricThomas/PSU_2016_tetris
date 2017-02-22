@@ -1,0 +1,129 @@
+/*
+** tetris.c for tetris in /home/cedric/delivery/PSU/PSU_2016_tetris/parse/tertrimino
+** 
+** Made by 
+** Login   <cedric.thomas@epitech.eu>
+** 
+** Started on  Tue Feb 21 20:54:39 2017 
+** Last update Wed Feb 22 00:43:37 2017 
+*/
+#include <sys/stat.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <dirent.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include "get_next_line.h"
+#include "my.h"
+#include "tetris.h"
+
+static DIR	*my_opendir(char *path)
+{
+  DIR		*my_folder;
+
+  if ((my_folder = opendir(path)) == NULL)
+    {
+      my_puterror(path);
+      my_puterror(": cannot open directory\n");
+      closedir(my_folder);
+      return (NULL);
+    }
+  return (my_folder);
+}
+
+static int	get_shape_nbr(t_tetrimino **form_list, char *path, int *size)
+{
+  char		*exec_path;
+  DIR		*my_folder;
+  t_dirent	*dp;
+  t_stat	my_stat;
+
+  *size = 0;
+  if ((my_folder = my_opendir(path)) == NULL)
+    return (84);
+  while ((dp = readdir(my_folder)) != NULL)
+    if (match(dp->d_name, "*.tetrimino"))
+      {
+	if ((exec_path = my_strcatdup(path, dp->d_name, 0)) == NULL)
+	  return (84);
+	if (lstat(exec_path, &my_stat) == -1)
+	  return (84);
+	if (S_ISREG(my_stat.st_mode))
+	  *size += 1;
+	free(exec_path);
+      }
+  if ((*form_list = malloc(sizeof(t_tetrimino) * (*size + 1))) == NULL)
+    return (84);
+  (*form_list)[*size].matrix = NULL;
+  closedir(my_folder);  
+  return (0);
+}
+
+//#TOCHANGE
+
+int	get_matrix_from_file(int *index, char *path)
+{
+  int	fd;
+  char	*s;
+
+  *index += 1;
+  if ((fd = open(path, O_RDONLY)) == -1)
+    {
+      my_puterror("error file loading\n");
+      return (84);
+    }
+  my_putchar('\n');
+  my_putchar('\n');
+  while ((s = get_next_line(fd)) != NULL)
+    {
+      my_putstr(s);
+      my_putchar('\n');
+      free(s);
+    }
+  close(fd);
+  return (0);
+}
+
+static int	fill_list(t_tetrimino **form_list, char *path)
+{
+  DIR		*my_folder;
+  t_dirent	*dp;
+  t_stat	my_stat;
+  char		*exec_path;
+  int		index;
+
+  index = 0;
+  if ((my_folder = my_opendir(path)) == NULL)
+    return (84);
+  while ((dp = readdir(my_folder)) != NULL)
+    if (match(dp->d_name, "*.tetrimino"))
+      {
+	if ((exec_path = my_strcatdup(path, dp->d_name, 0)) == NULL)
+	  return (84);
+	if (lstat(exec_path, &my_stat) == -1)
+	  return (84);
+	if (S_ISREG(my_stat.st_mode))
+	  if (get_matrix_from_file(&index, exec_path))
+	    return (84);
+	free(exec_path);
+      }
+  closedir(my_folder);
+  return (0);
+}
+
+int	get_form(t_tetrimino **form_list)
+{
+  char	*path;
+  int	size;
+
+  if ((path = my_strdup(FOLDER_TETRIS)) == NULL)
+    return (84);
+  if (path[my_strlen(path) - 1] != '/')
+    if ((path = my_strcatdup(path, "/", 1)) == NULL)
+      return (84);
+  if (get_shape_nbr(form_list, path, &size) == 84)
+    return (84);
+  if (fill_list(form_list, path))
+    return (84);
+  free(path);
+}

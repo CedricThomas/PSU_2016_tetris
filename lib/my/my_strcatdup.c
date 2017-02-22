@@ -5,19 +5,19 @@
 ** Login   <cedric@epitech.net>
 ** 
 ** Started on  Tue Oct 18 15:24:12 2016 Cédric Thomas
-** Last update Wed Nov 30 13:48:53 2016 Cédric Thomas
+** Last update Mon Feb 20 21:46:43 2017 
 */
 
 #include <stdlib.h>
 #include "my.h"
 
-char    *my_strcatdup(char *s1, char *s2)
+char    *my_strcatdup(char *s1, char *s2, int freeval)
 {
   int   i;
   char	*dest;
   int	len;
 
-  i = 0;
+  i = -1;
   if (s2 == NULL)
     return (s1);
   len = 0;
@@ -25,14 +25,17 @@ char    *my_strcatdup(char *s1, char *s2)
     len = my_strlen(s1);
   if ((dest = malloc(sizeof(char) * (len + my_strlen(s2) + 1))) == NULL)
     return (NULL);
-  while (i <  (len + my_strlen(s2)))
+  while (++i <  (len + my_strlen(s2)))
     {
       if (i < len)
 	dest[i] = s1[i];
       else
 	dest[i] = s2[i - len];
-      i += 1;
     }
   dest[i] = '\0';
+  if (freeval == 1 || freeval == 3)
+    free(s1);
+  if (freeval == 2 || freeval == 3)
+    free(s2);
   return (dest);
 }
