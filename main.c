@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Wed Feb 22 09:46:31 2017
-** Last update Wed Feb 22 09:46:35 2017
+** Last update Wed Feb 22 10:00:05 2017 
 */
 
 #include <stdlib.h>
@@ -52,19 +52,19 @@ static void	  my_free_rule(t_game_rules *my_rules)
 int		main(int ac, char **av)
 {
   t_game_rules	my_rules;
-  t_tetrimino	*form_list;
+  t_tetrimino	*shape_list;
 
   if (ac == 2 && !my_strcmp("--help", av[1]))
     return (help(0));
   if (get_gamerules(&my_rules, av, ac) == 84)
     return (84);
-  if (get_form(&form_list) == 84)
+  if (get_shape(&shape_list) == 84)
     return (84);
   //insérer ici la fonction de gestion du jeu.
   if (my_rules.debug == 1)
-    debug_mode(form_list, &my_rules);
+    debug_mode(shape_list, &my_rules);
   //the_game(&my_rules, form_list);
   my_free_rule(&my_rules);
-  free(form_list);
+  free(shape_list);
   return (0);
 }

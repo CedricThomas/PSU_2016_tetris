@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Tue Feb 21 20:54:39 2017 
-** Last update Wed Feb 22 00:58:17 2017 
+** Last update Wed Feb 22 09:58:43 2017 
 */
 #include <sys/stat.h>
 #include <unistd.h>
@@ -31,7 +31,7 @@ static DIR	*my_opendir(char *path)
   return (my_folder);
 }
 
-static int	get_shape_nbr(t_tetrimino **form_list, char *path, int *size)
+static int	get_shape_nbr(t_tetrimino **shape_list, char *path, int *size)
 {
   char		*exec_path;
   DIR		*my_folder;
@@ -52,9 +52,9 @@ static int	get_shape_nbr(t_tetrimino **form_list, char *path, int *size)
 	  *size += 1;
 	free(exec_path);
       }
-  if ((*form_list = malloc(sizeof(t_tetrimino) * (*size + 1))) == NULL)
+  if ((*shape_list = malloc(sizeof(t_tetrimino) * (*size + 1))) == NULL)
     return (84);
-  (*form_list)[*size].matrix = NULL;
+  (*shape_list)[*size].matrix = NULL;
   closedir(my_folder);
   return (0);
 }
@@ -85,7 +85,7 @@ int	get_matrix_from_file(int *index, char *path)
   return (0);
 }
 
-static int	fill_list(t_tetrimino **form_list, char *path)
+static int	fill_list(t_tetrimino **shape_list, char *path)
 {
   DIR		*my_folder;
   t_dirent	*dp;
@@ -112,7 +112,7 @@ static int	fill_list(t_tetrimino **form_list, char *path)
   return (0);
 }
 
-int	get_form(t_tetrimino **form_list)
+int	get_shape(t_tetrimino **shape_list)
 {
   char	*path;
   int	size;
@@ -122,9 +122,9 @@ int	get_form(t_tetrimino **form_list)
   if (path[my_strlen(path) - 1] != '/')
     if ((path = my_strcatdup(path, "/", 1)) == NULL)
       return (84);
-  if (get_shape_nbr(form_list, path, &size) == 84)
+  if (get_shape_nbr(shape_list, path, &size) == 84)
     return (84);
-  if (fill_list(form_list, path))
+  if (fill_list(shape_list, path))
     return (84);
   free(path);
 }
