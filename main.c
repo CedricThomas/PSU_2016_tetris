@@ -5,14 +5,16 @@
 ** Login   <cedric@epitech.net>
 ** 
 ** Started on  Sat Oct 22 10:31:05 2016 Cédric Thomas
-** Last update Wed Feb 22 00:23:16 2017 
+** Last update Wed Feb 22 09:42:16 2017 
 */
 #include <stdlib.h>
 #include "tetris.h"
 #include "my.h"
 
-static int	help()
+int	help(int jump)
 {
+  if (jump == 1)
+    my_putchar('\n');
   my_putstr("Usage: ./tetris [option]\nOptions:\n");
   my_putstr("  --help\t\tDisplay this help\n");
   my_putstr("  -l --level={num}\tStart at level num\n");
@@ -52,7 +54,7 @@ int		main(int ac, char **av)
   t_tetrimino	*form_list;
 
   if (ac == 2 && !my_strcmp("--help", av[1]))
-    return (help());
+    return (help(0));
   if (get_gamerules(&my_rules, av, ac) == 84)
     return (84);
   if (get_form(&form_list) == 84)

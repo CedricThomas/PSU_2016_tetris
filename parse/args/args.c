@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Mon Feb 20 22:23:37 2017 
-** Last update Wed Feb 22 00:57:42 2017 
+** Last update Wed Feb 22 09:17:12 2017 
 */
 #include <stdlib.h>
 #include "my.h"
@@ -75,9 +75,9 @@ static int	cmp_args(char **args, int ac,
     {
       my_puterror(args[i - 1]);
       my_puterror(" is an invalid argument\n");
-      return (1);
+      help(1);
     }
-  return (0);
+  return (exitval ? 1 : 0);
 }
 
 static int	get_default_gamerules(t_game_rules *my_rules)
