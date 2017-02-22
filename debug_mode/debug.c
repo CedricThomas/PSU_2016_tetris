@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Wed Feb 22 09:16:27 2017 Maxime Jenny
-** Last update Wed Feb 22 09:52:12 2017 Maxime Jenny
+** Last update Wed Feb 22 10:01:05 2017 Maxime Jenny
 */
 
 #include <stdlib.h>
@@ -24,6 +24,6 @@ int	debug_mode(t_tetrimino *form_list, t_game_rules *my_rules)
   my_printf("Key Pause :   %s\n", my_rules->key_Pause);
   my_printf("Next :   %s\n", (my_rules->next) ? ("Yes") : ("No"));
   my_printf("Level :   %d\n", my_rules->level);
-  my_printf("Size :   %d*%d", my_rules->map.x, my_rules->map.y);
+  my_printf("Size :   %d*%d\n", my_rules->map.x, my_rules->map.y);
   // my_printf("Tertriminos :   %d\n");
 }
