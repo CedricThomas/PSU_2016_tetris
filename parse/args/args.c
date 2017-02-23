@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Mon Feb 20 22:23:37 2017 
-** Last update Wed Feb 22 09:17:12 2017 
+** Last update Thu Feb 23 15:12:03 2017 
 */
 #include <stdlib.h>
 #include "my.h"
@@ -17,7 +17,7 @@ static t_parse	myparse[ARGS_VALUES] =
     {"-l", "--level", NULL, 0},
     {"-kl", "--key-left", NULL, 0},
     {"-kr", "--key-right", NULL, 0},
-    {"-kt", "--key-top", NULL, 0},
+    {"-kt", "--key-turn", NULL, 0},
     {"-kd", "--key-drop", NULL, 0},
     {"-kq", "--key-quit", NULL, 0},
     {"-kp", "--key-pause", NULL, 0},
@@ -128,15 +128,5 @@ int	get_gamerules(t_game_rules *my_rules, char **args, int ac)
       if (check_new_rules(my_rules))
 	return (84);
     }
-  my_printf("LEVEL : %d\n", my_rules->level);
-  my_printf("LEFT : \"%s\"\n", my_rules->key_Left);
-  my_printf("RIGHT : \"%s\"\n", my_rules->key_Right);
-  my_printf("TURN : \"%s\"\n", my_rules->key_Turn);
-  my_printf("DROP : \"%s\"\n", my_rules->key_Drop);
-  my_printf("QUIT : \"%s\"\n", my_rules->key_Quit);
-  my_printf("PAUSE : \"%s\"\n", my_rules->key_Pause);
-  my_printf("MAP : (%d,%d)\n", my_rules->map.x, my_rules->map.y);
-  my_printf("NEXT : %d\n", my_rules->next);
-  my_printf("DEBUG : %d\n", my_rules->debug);
   return (0);
 }

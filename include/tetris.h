@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Mon Feb 20 20:44:55 2017
-** Last update Wed Feb 22 09:59:11 2017 
+** Last update Wed Feb 22 21:08:22 2017 
 */
 #ifndef TETRIS_H_
 # define TETRIS_H_
@@ -24,6 +24,9 @@
 # define PKEY		3
 # define PBOOLEAN	4
 
+# include <sys/types.h>
+# include <dirent.h>
+
 /*
 **SIMPLE STRUCT
 */
@@ -36,10 +39,12 @@ typedef struct		s_vector2i
 
 typedef struct		s_matrix
 {
+  char			**matrix;
+  t_vector2i		size;
+  int			color;
+  int			valid;
+  t_vector2i		pos;
   char			*name;
-  int			**matrix;
-  int			x;
-  int			y;
 }			t_matrix;
 
 typedef struct stat	t_stat;
@@ -119,7 +124,16 @@ int     parse_vector(t_parse *parse, char *value);
 **PARSE/TETRIMINO
 */
 
-int	get_shape(t_tetrimino **form_list);
+int		get_shape(t_tetrimino **form_list);
+
+int		fill_shape(int fd, char **header,
+			   int index, t_tetrimino **shape_list);
+
+DIR		*my_opendir(char *path);
+int		my_open(char *path);
+char		*cut_ext(char *file, char *ext);
+int		my_len_sum(char **tab);
+int		clean_gnl(int fd);
 
 /*
 **MATH
@@ -127,10 +141,18 @@ int	get_shape(t_tetrimino **form_list);
 
 t_vector2i	myvector2i(int x, int y);
 
+int		create_matrix(int x, int y, t_matrix *);
+int		show_tetri(t_matrix *matrix);
+
 /*
 **MISC
 */
 
 int	is_an_int(char *str);
+
+char	**fd_to_tab(int fd, int h);
+int	is_only_composed_of(char *str1, char *str2);
+char	**realloc_tab(char **tab, int size);
+
 
 #endif /* !TETRIS_H_ */

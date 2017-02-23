@@ -5,17 +5,21 @@
 ## Login   <cedric@epitech.net>
 ##
 ## Started on  Sat Oct 22 10:37:32 2016 Cédric Thomas
-## Last update Wed Feb 22 09:19:05 2017 Maxime Jenny
+## Last update Wed Feb 22 15:22:53 2017 
 ##
 
 SRC	=	main.c				\
 		math/vector.c			\
+		math/matrix.c			\
 		misc/nbr.c			\
+		misc/str.c			\
 		parse/match.c			\
 		parse/args/args.c		\
 		parse/args/prepare.c		\
 		parse/args/type.c		\
 		parse/tertrimino/tetris.c	\
+		parse/tertrimino/shape.c	\
+		parse/tertrimino/misc.c		\
 		debug_mode/debug.c		\
 		game/the_game.c
 
