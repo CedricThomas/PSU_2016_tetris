@@ -5,10 +5,11 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Wed Feb 22 09:46:31 2017
-** Last update Thu Feb 23 15:11:48 2017 
+** Last update Wed Feb 22 10:00:05 2017
 */
 
 #include <stdlib.h>
+#include <ncurses.h>
 #include "tetris.h"
 #include "my.h"
 
@@ -23,7 +24,7 @@ int	help(int jump)
   my_putstr("\tMove tetrimino on LEFT using key K\n");
   my_putstr("  -kr --key-right={K}");
   my_putstr("\tMove tetrimino on RIGHT using key K\n");
-  my_putstr("  -kt --key-turn={K}");
+  my_putstr("  -kt --key-top={K}");
   my_putstr("\tTurn tetrimino with key K\n");
   my_putstr("  -kd --key-drop={K}");
   my_putstr("\tSet default DROP on key K\n");
@@ -63,7 +64,8 @@ int		main(int ac, char **av)
   //insérer ici la fonction de gestion du jeu.
   if (my_rules.debug == 1)
     debug_mode(shape_list, &my_rules);
-  //the_game(&my_rules, form_list);
+  // the_game(&my_rules, shape_list);
+  // endwin();
   my_free_rule(&my_rules);
   free(shape_list);
   return (0);

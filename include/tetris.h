@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Mon Feb 20 20:44:55 2017
-** Last update Wed Feb 22 21:08:22 2017 
+** Last update Wed Feb 22 21:08:22 2017
 */
 #ifndef TETRIS_H_
 # define TETRIS_H_
@@ -30,6 +30,14 @@
 /*
 **SIMPLE STRUCT
 */
+
+typedef struct		s_time
+{
+  unsigned long long	first_time;
+  unsigned long long	prec_time;
+  unsigned long long	actual_time;
+  unsigned long long	time_before_pause;
+}			t_time;
 
 typedef struct		s_vector2i
 {
@@ -92,6 +100,9 @@ int	debug_mode(t_tetrimino *form_list, t_game_rules *my_rules);
 */
 
 int	the_game(t_game_rules *my_rules, t_tetrimino *form_list);
+int	set_time(t_time *t);
+int	find_time(t_time *t);
+int	interpret_time(t_time *t);
 
 /*
 **PARSE

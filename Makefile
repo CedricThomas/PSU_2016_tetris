@@ -5,7 +5,7 @@
 ## Login   <cedric@epitech.net>
 ##
 ## Started on  Sat Oct 22 10:37:32 2016 Cédric Thomas
-## Last update Wed Feb 22 15:22:53 2017 
+## Last update Thu Feb 23 16:44:05 2017 Maxime Jenny
 ##
 
 SRC	=	main.c				\
@@ -21,7 +21,8 @@ SRC	=	main.c				\
 		parse/tertrimino/shape.c	\
 		parse/tertrimino/misc.c		\
 		debug_mode/debug.c		\
-		game/the_game.c
+		game/the_game.c			\
+		game/time.c
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -29,7 +30,7 @@ NAME	=	tetris
 
 LIB_F	=	./lib/
 
-LIB	=	-lmy -lmyprintf -lgnl
+LIB	=	-lmy -lmyprintf -lgnl -lncurses
 
 INCLUDE	=	-I./include/
 
