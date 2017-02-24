@@ -5,7 +5,7 @@
 ## Login   <cedric@epitech.net>
 ##
 ## Started on  Sat Oct 22 10:37:32 2016 Cédric Thomas
-## Last update Fri Feb 24 18:14:30 2017 Maxime Jenny
+## Last update Fri Feb 24 21:23:59 2017 
 ##
 
 SRC	=	main.c				\
@@ -20,6 +20,7 @@ SRC	=	main.c				\
 		parse/tertrimino/tetris.c	\
 		parse/tertrimino/shape.c	\
 		parse/tertrimino/misc.c		\
+		parse/tertrimino/sort.c		\
 		debug_mode/debug.c		\
 		game/the_game.c			\
 		game/time.c			\

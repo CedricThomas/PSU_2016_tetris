@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Mon Feb 20 20:44:55 2017
-** Last update Fri Feb 24 20:27:54 2017 
+** Last update Fri Feb 24 21:27:17 2017 
 */
 #ifndef TETRIS_H_
 # define TETRIS_H_
@@ -155,6 +155,8 @@ int		my_open(char *path);
 char		*cut_ext(char *file, char *ext);
 int		my_len_sum(char **tab);
 int		clean_gnl(int fd);
+
+void		sort_tetri(t_tetrimino **shape_list);
 
 /*
 **MATH
