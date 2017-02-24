@@ -65,7 +65,7 @@ int		setmap(t_tetris *tetris)
       if ((tetris->map[y] = malloc(tetris->my_rules->map.x + 3)) == NULL)
 	return (-1);
       tetris->map[y][x] = '#';
-      while (++x < tetris->my_rules->map.x)
+      while (++x <= tetris->my_rules->map.x)
 	{
 	  if (y == 0 || y == tetris->my_rules->map.y + 1)
 	    tetris->map[y][x] = '#';

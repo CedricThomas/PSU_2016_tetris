@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Wed Feb 22 08:50:45 2017 Maxime Jenny
-** Last update Fri Feb 24 18:41:14 2017 Maxime Jenny
+** Last update Fri Feb 24 19:03:46 2017 Maxime Jenny
 */
 
 #include <sys/ioctl.h>
@@ -42,7 +42,7 @@ void		my_print_map(t_tetris *tetris, struct winsize size)
   else
     {
       y = -1;
-      while (++y < tetris->my_rules->map.y)
+      while (++y < tetris->my_rules->map.y + 2)
 	mvprintw((size.ws_row / 2) - (tetris->my_rules->map.y / 2) + y,
 		 (size.ws_col / 2) - (tetris->my_rules->map.y / 2), "%s",
 		 tetris->map[y]);
@@ -68,6 +68,6 @@ int			the_game(t_tetris *tetris,
       my_print_map(tetris, size);
       refresh();
       // event(size, tetris);
-      clear();
+      // clear();
     }
 }

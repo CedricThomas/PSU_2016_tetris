@@ -1,11 +1,11 @@
 /*
 ** args.c for tetris in /home/cedric/delivery/PSU/PSU_2016_tetris/parse/args
-** 
-** Made by 
+**
+** Made by
 ** Login   <cedric.thomas@epitech.eu>
-** 
-** Started on  Mon Feb 20 22:23:37 2017 
-** Last update Thu Feb 23 15:12:03 2017 
+**
+** Started on  Mon Feb 20 22:23:37 2017
+** Last update Fri Feb 24 19:05:17 2017 Maxime Jenny
 */
 #include <stdlib.h>
 #include "my.h"
@@ -95,7 +95,7 @@ static int	get_default_gamerules(t_game_rules *my_rules)
     return (84);
   if ((my_rules->key_Pause = my_strdup(" ")) == NULL)
     return (84);
-  my_rules->map = myvector2i(20, 10);
+  my_rules->map = myvector2i(10, 20);
   my_rules->next = FALSE;
   my_rules->debug = FALSE;
   return (0);
