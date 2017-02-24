@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Wed Feb 22 15:21:00 2017 
-** Last update Wed Feb 22 17:58:58 2017 
+** Last update Fri Feb 24 20:41:46 2017 
 */
 #include <stdlib.h>
 #include "my_printf.h"
@@ -42,10 +42,6 @@ int	create_matrix(int x, int y, t_matrix *matrix)
 
 int	show_tetri(t_matrix *matrix)
 {
-  int           i;
-  int           j;
-
-  i = 0;
   my_printf("Tetriminos : Name %s : ", matrix->name);
   if (matrix->valid)
     {
@@ -58,5 +54,30 @@ int	show_tetri(t_matrix *matrix)
       my_printf("Error\n");
       return (84);
     }  
+  return (0);
+}
+
+int	rrotate_matrix(t_matrix *matrix)
+{
+  int           i;
+  int           j;
+  char		**new;
+
+  my_swap(&(matrix->size.x), &(matrix->size.y));
+  if ((new = malloc(sizeof(char *) * (matrix->size.y + 1))) == NULL)
+    return (84);
+  i = -1;
+  while (++i < matrix->size.y)
+    {
+      if ((new[i] = malloc(sizeof(char) * (matrix->size.x + 1))) == NULL)
+	return (84);
+      j = -1;      
+      while (++j < matrix->size.x)
+	new[i][j] = matrix->matrix[matrix->size.x - j - 1][i];
+      new[i][j] = 0;
+    }
+  new[i] = NULL;
+  free_tab(matrix->matrix);
+  matrix->matrix = new;
   return (0);
 }

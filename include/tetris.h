@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Mon Feb 20 20:44:55 2017
-** Last update Wed Feb 22 21:08:22 2017
+** Last update Fri Feb 24 20:27:54 2017 
 */
 #ifndef TETRIS_H_
 # define TETRIS_H_
@@ -162,6 +162,7 @@ int		clean_gnl(int fd);
 
 t_vector2i	myvector2i(int x, int y);
 
+int		rrotate_matrix(t_matrix *matrix);
 int		create_matrix(int x, int y, t_matrix *);
 int		show_tetri(t_matrix *matrix);
 

@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Wed Feb 22 09:46:31 2017
-** Last update Wed Feb 22 10:00:05 2017
+** Last update Fri Feb 24 21:01:31 2017 
 */
 
 #include <stdlib.h>
@@ -40,7 +40,7 @@ int	help(int jump)
   return (0);
 }
 
-static void	  my_free_rule(t_game_rules *my_rules)
+static void	  my_free_rule(t_game_rules *my_rules, t_tetris tetris)
 {
   free(my_rules->key_Left);
   free(my_rules->key_Right);
@@ -48,6 +48,7 @@ static void	  my_free_rule(t_game_rules *my_rules)
   free(my_rules->key_Drop);
   free(my_rules->key_Quit);
   free(my_rules->key_Pause);
+  free_tab(tetris.map);
 }
 
 int		setmap(t_tetris *tetris)
@@ -55,26 +56,27 @@ int		setmap(t_tetris *tetris)
   int		y;
   int		x;
 
-  if ((tetris->map = malloc(sizeof(char *) * tetris->my_rules->map.y + 2))
+  if ((tetris->map = malloc(sizeof(char *) * (tetris->my_rules->map.y + 3)))
       == NULL)
     return (-1);
   y = -1;
   while (++y < tetris->my_rules->map.y + 2)
     {
-      x = 0;
-      if ((tetris->map[y] = malloc(tetris->my_rules->map.x + 3)) == NULL)
+      if ((tetris->map[y] =
+	   malloc(sizeof(char) * (tetris->my_rules->map.x + 3))) == NULL)
 	return (-1);
-      tetris->map[y][x] = '#';
-      while (++x <= tetris->my_rules->map.x)
+      x = -1;
+      while (++x < tetris->my_rules->map.x + 2)
 	{
-	  if (y == 0 || y == tetris->my_rules->map.y + 1)
+	  if (y == 0  || y == tetris->my_rules->map.y + 1 ||
+	      x == 0 || x == tetris->my_rules->map.x + 1)
 	    tetris->map[y][x] = '#';
 	  else
 	    tetris->map[y][x] = ' ';
 	}
-      tetris->map[y][x++] = '#';
-      tetris->map[y][x] = '\0';
+      tetris->map[y][x] = 0;
     }
+  tetris->map[y] = NULL;
   return (0);
 }
 
@@ -90,6 +92,8 @@ int		main(int ac, char **av)
     return (84);
   if (get_shape(&shape_list) == 84)
     return (84);
+  rrotate_matrix(&(shape_list[3]));
+  rrotate_matrix(&(shape_list[3]));
   if (my_rules.debug == 1)
     debug_mode(shape_list, &my_rules);
   tetris.my_rules = &my_rules;
@@ -97,7 +101,7 @@ int		main(int ac, char **av)
     return (84);
   the_game(&tetris, shape_list);
   endwin();
-  my_free_rule(&my_rules);
+  my_free_rule(&my_rules, tetris);
   free(shape_list);
   return (0);
 }
