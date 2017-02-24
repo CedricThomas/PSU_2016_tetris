@@ -39,6 +39,7 @@ typedef struct		s_time
   unsigned long long	time_before_pause;
 }			t_time;
 
+
 typedef struct		s_vector2i
 {
   int			x;
@@ -86,6 +87,12 @@ typedef struct		s_game_rules
   int			debug;
 }			t_game_rules;
 
+typedef struct		t_tetris
+{
+  char			**map;
+  t_game_rules		*my_rules;
+}			t_tetris;
+
 int	help(int jump);
 
 
@@ -99,7 +106,7 @@ int	debug_mode(t_tetrimino *form_list, t_game_rules *my_rules);
 ** GAME
 */
 
-int	the_game(t_game_rules *my_rules, t_tetrimino *form_list);
+int	the_game(t_tetris *tetris, t_tetrimino *form_list);
 int	set_time(t_time *t);
 int	find_time(t_time *t);
 int	interpret_time(t_time *t);

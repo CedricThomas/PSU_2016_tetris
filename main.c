@@ -50,10 +50,39 @@ static void	  my_free_rule(t_game_rules *my_rules)
   free(my_rules->key_Pause);
 }
 
+int		setmap(t_tetris *tetris)
+{
+  int		y;
+  int		x;
+
+  if ((tetris->map = malloc(sizeof(char *) * tetris->my_rules->map.y + 2))
+      == NULL)
+    return (-1);
+  y = -1;
+  while (++y < tetris->my_rules->map.y + 2)
+    {
+      x = 0;
+      if ((tetris->map[y] = malloc(tetris->my_rules->map.x + 3)) == NULL)
+	return (-1);
+      tetris->map[y][x] = '#';
+      while (++x < tetris->my_rules->map.x)
+	{
+	  if (y == 0 || y == tetris->my_rules->map.y + 1)
+	    tetris->map[y][x] = '#';
+	  else
+	    tetris->map[y][x] = ' ';
+	}
+      tetris->map[y][x++] = '#';
+      tetris->map[y][x] = '\0';
+    }
+  return (0);
+}
+
 int		main(int ac, char **av)
 {
   t_game_rules	my_rules;
   t_tetrimino	*shape_list;
+  t_tetris	tetris;
 
   if (ac == 2 && !my_strcmp("--help", av[1]))
     return (help(0));
@@ -61,11 +90,13 @@ int		main(int ac, char **av)
     return (84);
   if (get_shape(&shape_list) == 84)
     return (84);
-  //insérer ici la fonction de gestion du jeu.
   if (my_rules.debug == 1)
     debug_mode(shape_list, &my_rules);
-  // the_game(&my_rules, shape_list);
-  // endwin();
+  tetris.my_rules = &my_rules;
+  if (setmap(&tetris) == -1)
+    return (84);
+  the_game(&tetris, shape_list);
+  endwin();
   my_free_rule(&my_rules);
   free(shape_list);
   return (0);

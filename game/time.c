@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Wed Feb 22 14:57:00 2017 Maxime Jenny
-** Last update Thu Feb 23 16:10:12 2017 Maxime Jenny
+** Last update Fri Feb 24 18:09:56 2017 Maxime Jenny
 */
 
 #include <time.h>
@@ -41,7 +41,7 @@ int			interpret_time(t_time *t)
 
   tim_e = t->actual_time - t->first_time + t->time_before_pause;
   if (t->prec_time != tim_e)
-    my_printf("%lu:%lu:%lu\n", tim_e / 3600, tim_e / 60, tim_e % 60);
+    my_printf("%lu:%lu:%lu\n", tim_e / 3600, tim_e % 3600 / 60, tim_e % 60);
   t->prec_time = tim_e;
   return (0);
 }
