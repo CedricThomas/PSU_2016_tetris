@@ -1,12 +1,13 @@
 /*
 ** args.c for tetris in /home/cedric/delivery/PSU/PSU_2016_tetris/parse/args
-**
-** Made by
+** 
+** Made by 
 ** Login   <cedric.thomas@epitech.eu>
-**
-** Started on  Mon Feb 20 22:23:37 2017
-** Last update Fri Feb 24 19:05:17 2017 Maxime Jenny
+** 
+** Started on  Mon Feb 20 22:23:37 2017 
+** Last update Fri Feb 24 19:11:26 2017 
 */
+#include <ncurses.h>
 #include <stdlib.h>
 #include "my.h"
 #include "my_printf.h"
@@ -22,7 +23,7 @@ static t_parse	myparse[ARGS_VALUES] =
     {"-kq", "--key-quit", NULL, 0},
     {"-kp", "--key-pause", NULL, 0},
     {NULL, "--map-size", NULL, 0},
-    {"-w", "–-without-next", NULL, 0},
+    {"-w", "--without-next", NULL, 0},
     {"-d", "--debug", NULL, 0}
   };
 
@@ -82,22 +83,24 @@ static int	cmp_args(char **args, int ac,
 
 static int	get_default_gamerules(t_game_rules *my_rules)
 {
+  initscr();
   my_rules->level = 1;
-  if ((my_rules->key_Left = my_strdup("^[[D")) == NULL)
+  if ((my_rules->key_Left = my_strdup(tigetstr("kcub1"))) == NULL)
     return (84);
-  if ((my_rules->key_Right = my_strdup("^[[C")) == NULL)
+  if ((my_rules->key_Right = my_strdup(tigetstr("kcuf1"))) == NULL)
     return (84);
-  if ((my_rules->key_Turn = my_strdup("^[[A")) == NULL)
+  if ((my_rules->key_Turn = my_strdup(tigetstr("kcuu1"))) == NULL)
     return (84);
-  if ((my_rules->key_Drop = my_strdup("^[[B")) == NULL)
+  if ((my_rules->key_Drop = my_strdup(tigetstr("kcud1"))) == NULL)
     return (84);
-  if ((my_rules->key_Quit = my_strdup("Q")) == NULL)
+  if ((my_rules->key_Quit = my_strdup("q")) == NULL)
     return (84);
   if ((my_rules->key_Pause = my_strdup(" ")) == NULL)
     return (84);
   my_rules->map = myvector2i(10, 20);
   my_rules->next = FALSE;
   my_rules->debug = FALSE;
+  endwin();
   return (0);
 }
 

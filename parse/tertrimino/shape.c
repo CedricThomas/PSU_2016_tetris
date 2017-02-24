@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Wed Feb 22 13:41:55 2017 
-** Last update Wed Feb 22 22:08:14 2017 
+** Last update Thu Feb 23 16:10:46 2017 
 */
 #include <stdlib.h>
 #include "my.h"
@@ -25,7 +25,7 @@ static t_vector2i	circle_height(char **tab)
       if (max_len.x < 0 && is_in('*', tab[i]))
 	max_len.x = i;
       if (max_len.y < 0 && is_in('*', tab[i]) ||
-	  max_len.y > 0 &&  i > max_len.y && is_in('*', tab[i]))
+	  i > max_len.y && is_in('*', tab[i]))
 	max_len.y = i;
     }
   return (max_len);
@@ -43,13 +43,13 @@ static t_vector2i	circle_width(char **tab)
   while (tab[++i])
     {
       vec = myvector2i(0, my_strlen(tab[i]) - 1);
-      while (tab[i][vec.x] != '*' && tab[i][vec.x])
+      while (tab[i][vec.x] != '*' && tab[i][vec.x] && is_in('*', tab[i]))
 	vec.x += 1;
-      while (vec.y > 0 && tab[i][vec.y] != '*')
+      while (vec.y > 0 && tab[i][vec.y] != '*' && is_in('*', tab[i]))
 	vec.y -= 1;
-      if (vec.x < max_len.x || max_len.x < 0 && tab[i][vec.x] == '*')
+      if ((vec.x < max_len.x || max_len.x < 0) && is_in('*', tab[i]))
 	max_len.x = vec.x;
-      if (vec.y > max_len.y || max_len.y < 0)
+      if (vec.y > max_len.y && is_in('*', tab[i]))
 	max_len.y = vec.y;
     }
   return (max_len);
