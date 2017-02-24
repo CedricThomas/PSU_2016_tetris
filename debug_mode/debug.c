@@ -5,17 +5,22 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Wed Feb 22 09:16:27 2017 Maxime Jenny
-** Last update Fri Feb 24 18:58:45 2017 
+** Last update Fri Feb 24 19:26:12 2017 Maxime Jenny
 */
 
 #include <stdlib.h>
+#include <ncurses.h>
+#include <unistd.h>
+#include <termio.h>
 #include "tetris.h"
 #include "my.h"
 #include "my_printf.h"
 
-int	debug_mode(t_tetrimino *form_list, t_game_rules *my_rules)
+int		debug_mode(t_tetrimino *form_list, t_game_rules *my_rules)
 {
-  int	i;
+  int		i;
+  struct termio	termio;
+  char		buf;
 
   my_printf("*** DEBUG MODE ***\n");
   my_printf("Key Left :   %s\n", my_rules->key_Left);
@@ -33,4 +38,8 @@ int	debug_mode(t_tetrimino *form_list, t_game_rules *my_rules)
   i = -1;
   while (form_list[++i].name != NULL)
     show_tetri(&form_list[i]);
+  my_printf("Press any key to start Tetris");
+  my_set_term(&termio);
+  while (read(0, &buf, 1) == 0);
+  my_reset_term(&termio);
 }

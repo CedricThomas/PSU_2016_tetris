@@ -26,6 +26,7 @@
 
 # include <sys/types.h>
 # include <dirent.h>
+# include <termio.h>
 
 /*
 **SIMPLE STRUCT
@@ -110,6 +111,8 @@ int	the_game(t_tetris *tetris, t_tetrimino *form_list);
 int	set_time(t_time *t);
 int	find_time(t_time *t);
 int	interpret_time(t_time *t);
+int	my_set_term(struct termio *termios);
+int	my_reset_term(struct termio *termio);
 
 /*
 **PARSE

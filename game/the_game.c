@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Wed Feb 22 08:50:45 2017 Maxime Jenny
-** Last update Fri Feb 24 19:03:46 2017 Maxime Jenny
+** Last update Fri Feb 24 19:21:45 2017 Maxime Jenny
 */
 
 #include <sys/ioctl.h>
@@ -19,15 +19,6 @@
 #include <stdlib.h>
 #include "tetris.h"
 #include "my.h"
-
-int			my_set_term(struct termio *termios)
-{
-  ioctl(0, TCGETA, termios);
-  termios->c_lflag &= ~(ICANON | ECHO);
-  termios->c_cc[VTIME] = 0;
-  termios->c_cc[VMIN] = 0;
-  ioctl(0, TCSETA, termios);
-}
 
 void		my_print_map(t_tetris *tetris, struct winsize size)
 {
