@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Wed Feb 22 08:50:45 2017 Maxime Jenny
-** Last update Sun Feb 26 11:34:11 2017 
+** Last update Sun Feb 26 17:13:08 2017 
 */
 
 #include <sys/ioctl.h>
@@ -40,11 +40,10 @@ void		my_print_map(t_tetris *tetris, struct winsize size)
     }
 }
 
-
-
 int			the_game(t_tetris *tetris,
 				 t_tetrimino *shape_list)
 {
+  t_input		my_inputs;
   struct winsize	size;
   struct termio		termios;
   WINDOW		*win;
@@ -55,27 +54,15 @@ int			the_game(t_tetris *tetris,
   keypad(win, 1);
   my_set_term(&termios);
   set_time(&t);
-  
-  /* char *readed; */
-  /* int end; */
-  
-  /* readed = malloc(sizeof(char) * 480); */
-  
+  if (set_input(&my_inputs, tetris) == 84)
+    return (84);
   while (1)
     {
+      try_input(&my_inputs, tetris);
       ioctl(0, TIOCGWINSZ, &size);
-      /* if ((end = read(0, readed, 480)) != 0) */
-      /* 	{ */
-      /* 	  readed[end] = 0; */
-      /* 	  if (!my_strcmp(readed, tetris->my_rules->key_Turn)) */
-      /* 	    { */
-      /* 	      endwin(); */
-      /* 	      exit(42); */
-      /* 	    } */
-      /* 	} */
       my_print_map(tetris, size);
       refresh();
-      // event(size, tetris);
-      // clear();
-    }
+      clear();
+    } 
+  reset_input(&my_inputs);
 }

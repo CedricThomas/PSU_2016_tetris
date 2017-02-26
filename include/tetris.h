@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Mon Feb 20 20:44:55 2017
-** Last update Sun Feb 26 11:03:14 2017 
+** Last update Sun Feb 26 17:09:51 2017 
 */
 #ifndef TETRIS_H_
 # define TETRIS_H_
@@ -17,6 +17,7 @@
 
 # define ARGS_VALUES	10
 # define ARGS_TYPE	4
+# define INPUT_NB	6
 
 # define PNULL		0
 # define PVALUE		1
@@ -55,7 +56,6 @@ typedef struct		s_matrix
 typedef struct stat	t_stat;
 typedef struct dirent	t_dirent;
 typedef t_matrix	t_tetrimino;
-typedef t_matrix	t_board;
 
 typedef struct		s_parse
 {
@@ -67,23 +67,30 @@ typedef struct		s_parse
 
 typedef struct		s_game_rules
 {
+  char			*key_left;
+  char			*key_right;
+  char			*key_turn;
+  char			*key_drop;
+  char			*key_quit;
+  char			*key_pause;
   int			level;
-  char			*key_Left;
-  char			*key_Right;
-  char			*key_Turn;
-  char			*key_Drop;
-  char			*key_Quit;
-  char			*key_Pause;
   t_vector2i		map;
   int			next;
   int			debug;
 }			t_game_rules;
 
-typedef struct		t_tetris
+typedef struct		s_tetris
 {
   char			**map;
   t_game_rules		*my_rules;
 }			t_tetris;
+
+typedef struct		s_input
+{
+  char			**sequence;
+  void			(**fct)(t_tetris *);
+  char			*input;
+}			t_input;
 
 int	help(int jump);
 
@@ -127,7 +134,19 @@ int	setmap(t_tetris *tetris);
 /*
 **events.c
 */
+void	my_pause(t_tetris *tetris);
+void    my_turn(t_tetris *tetris);
+void    my_quit(t_tetris *tetris);
+void    my_left(t_tetris *tetris);
+void    my_right(t_tetris *tetris);
+void    my_drop(t_tetris *tetris);
 
+/*
+**inputs.c
+*/
+int	set_input(t_input *my_inputs, t_tetris *tetris);
+int	reset_input(t_input *my_inputs);
+int	try_input(t_input *my_inputs, t_tetris *tetris);
 
 /*
 **PARSE

@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Mon Feb 20 22:23:37 2017 
-** Last update Fri Feb 24 19:11:26 2017 
+** Last update Sun Feb 26 15:30:57 2017 
 */
 #include <ncurses.h>
 #include <stdlib.h>
@@ -31,17 +31,17 @@ static void	link_pointers(t_game_rules *my_rules)
 {
   myparse[0].value = &(my_rules->level);
   myparse[0].type = PVALUE;
-  myparse[1].value = &(my_rules->key_Left);
+  myparse[1].value = &(my_rules->key_left);
   myparse[1].type = PKEY;
-  myparse[2].value = &(my_rules->key_Right);
+  myparse[2].value = &(my_rules->key_right);
   myparse[2].type = PKEY;
-  myparse[3].value = &(my_rules->key_Turn);
+  myparse[3].value = &(my_rules->key_turn);
   myparse[3].type = PKEY;
-  myparse[4].value = &(my_rules->key_Drop);
+  myparse[4].value = &(my_rules->key_drop);
   myparse[4].type = PKEY;
-  myparse[5].value = &(my_rules->key_Quit);
+  myparse[5].value = &(my_rules->key_quit);
   myparse[5].type = PKEY;
-  myparse[6].value = &(my_rules->key_Pause);
+  myparse[6].value = &(my_rules->key_pause);
   myparse[6].type = PKEY;
   myparse[7].value = &(my_rules->map);
   myparse[7].type = PVECTOR;
@@ -85,17 +85,17 @@ static int	get_default_gamerules(t_game_rules *my_rules)
 {
   initscr();
   my_rules->level = 1;
-  if ((my_rules->key_Left = my_strdup(tigetstr("kcub1"))) == NULL)
+  if ((my_rules->key_left = my_strdup(tigetstr("kcub1"))) == NULL)
     return (84);
-  if ((my_rules->key_Right = my_strdup(tigetstr("kcuf1"))) == NULL)
+  if ((my_rules->key_right = my_strdup(tigetstr("kcuf1"))) == NULL)
     return (84);
-  if ((my_rules->key_Turn = my_strdup(tigetstr("kcuu1"))) == NULL)
+  if ((my_rules->key_turn = my_strdup(tigetstr("kcuu1"))) == NULL)
     return (84);
-  if ((my_rules->key_Drop = my_strdup(tigetstr("kcud1"))) == NULL)
+  if ((my_rules->key_drop = my_strdup(tigetstr("kcud1"))) == NULL)
     return (84);
-  if ((my_rules->key_Quit = my_strdup("q")) == NULL)
+  if ((my_rules->key_quit = my_strdup("q")) == NULL)
     return (84);
-  if ((my_rules->key_Pause = my_strdup(" ")) == NULL)
+  if ((my_rules->key_pause = my_strdup(" ")) == NULL)
     return (84);
   my_rules->map = myvector2i(10, 20);
   my_rules->next = FALSE;
