@@ -5,8 +5,9 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Tue Feb 21 15:00:13 2017 
-** Last update Sun Feb 26 13:02:59 2017 
+** Last update Sun Feb 26 20:26:20 2017 
 */
+#include <curses.h>
 #include <stdlib.h>
 #include "my.h"
 #include "tetris.h"
@@ -49,11 +50,16 @@ int	parse_value(t_parse *parse, char *value)
 int	parse_key(t_parse *parse, char *value)
 {
   char	**casted;
+  char	*tiget;
 
   casted = (char **)parse->value;
   free(*casted);
-  if ((*casted = my_strdup(value)) == NULL)
+  initscr();
+  if ((tiget = tigetstr(value)) == (char *)-1 || tiget == 0)
+    tiget = value;
+  if ((*casted = my_strdup(tiget)) == NULL)
     return (84);
+  endwin();
   return (0);
 }
 
