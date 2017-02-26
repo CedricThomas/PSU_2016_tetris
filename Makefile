@@ -5,7 +5,7 @@
 ## Login   <cedric@epitech.net>
 ##
 ## Started on  Sat Oct 22 10:37:32 2016 Cédric Thomas
-## Last update Sun Feb 26 15:49:45 2017 
+## Last update Sun Feb 26 15:49:45 2017
 ##
 
 SRC	=	main.c				\

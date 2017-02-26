@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Wed Feb 22 08:50:45 2017 Maxime Jenny
-** Last update Sun Feb 26 17:13:08 2017 
+** Last update Sun Feb 26 17:23:19 2017 Maxime Jenny
 */
 
 #include <sys/ioctl.h>
@@ -63,6 +63,6 @@ int			the_game(t_tetris *tetris,
       my_print_map(tetris, size);
       refresh();
       clear();
-    } 
+    }
   reset_input(&my_inputs);
 }

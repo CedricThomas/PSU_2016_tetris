@@ -1,11 +1,11 @@
 /*
 ** matrix.c for tetris in /home/cedric/delivery/PSU/PSU_2016_tetris/parse/tertrimino
-** 
-** Made by 
+**
+** Made by
 ** Login   <cedric.thomas@epitech.eu>
-** 
-** Started on  Wed Feb 22 15:21:00 2017 
-** Last update Fri Feb 24 20:41:46 2017 
+**
+** Started on  Wed Feb 22 15:21:00 2017
+** Last update Sun Feb 26 17:23:35 2017 Maxime Jenny
 */
 #include <stdlib.h>
 #include "my_printf.h"
@@ -53,7 +53,7 @@ int	show_tetri(t_matrix *matrix)
     {
       my_printf("Error\n");
       return (84);
-    }  
+    }
   return (0);
 }
 
@@ -71,7 +71,7 @@ int	rrotate_matrix(t_matrix *matrix)
     {
       if ((new[i] = malloc(sizeof(char) * (matrix->size.x + 1))) == NULL)
 	return (84);
-      j = -1;      
+      j = -1;
       while (++j < matrix->size.x)
 	new[i][j] = matrix->matrix[matrix->size.x - j - 1][i];
       new[i][j] = 0;

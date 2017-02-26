@@ -1,11 +1,11 @@
 /*
 ** args.c for tetris in /home/cedric/delivery/PSU/PSU_2016_tetris/parse/args
-** 
-** Made by 
+**
+** Made by
 ** Login   <cedric.thomas@epitech.eu>
-** 
-** Started on  Mon Feb 20 22:23:37 2017 
-** Last update Sun Feb 26 15:30:57 2017 
+**
+** Started on  Mon Feb 20 22:23:37 2017
+** Last update Sun Feb 26 15:30:57 2017
 */
 #include <ncurses.h>
 #include <stdlib.h>
