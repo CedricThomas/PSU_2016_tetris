@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Tue Feb 21 20:54:39 2017 
-** Last update Fri Feb 24 21:27:07 2017 
+** Last update Sun Feb 26 11:40:05 2017 
 */
 #include <sys/stat.h>
 #include <unistd.h>
@@ -25,11 +25,23 @@ static int	check_header(char **header, char *line)
   i = -1;
   while (header[++i])
     if (is_an_int(header[i]))
-      return (84);
+      {
+	free(line);
+	free_tab(header);
+	return (84);
+      }
   if (i != 3)
-    return (84);
+    {
+      free(line);
+      free_tab(header);
+      return (84);
+    }
   if (my_strlen(line) != my_len_sum(header) + 2)
-    return (84);
+    {
+      free(line);
+      free_tab(header);
+      return (84);
+    }
   return (0);
 }
 

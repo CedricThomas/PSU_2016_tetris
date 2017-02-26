@@ -5,7 +5,7 @@
 ## Login   <cedric@epitech.net>
 ##
 ## Started on  Sat Oct 22 10:37:32 2016 Cédric Thomas
-## Last update Fri Feb 24 21:23:59 2017 
+## Last update Sat Feb 25 19:36:52 2017 
 ##
 
 SRC	=	main.c				\
@@ -23,7 +23,9 @@ SRC	=	main.c				\
 		parse/tertrimino/sort.c		\
 		debug_mode/debug.c		\
 		game/the_game.c			\
+		game/misc.c			\
 		game/time.c			\
+		game/term.c			\
 		game/events.c
 
 OBJ	=	$(SRC:.c=.o)

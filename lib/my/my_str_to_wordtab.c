@@ -5,7 +5,7 @@
 ** Login   <cedric@epitech.net>
 ** 
 ** Started on  Wed Oct 12 12:19:23 2016 Cédric Thomas
-** Last update Mon Feb 13 17:00:15 2017 
+** Last update Sat Feb 25 19:02:54 2017 
 */
 #include <stdlib.h>
 #include "my.h"
@@ -40,7 +40,7 @@ static int	*wordscounter(char *str, int *words)
     }
   i = 0;
   alpha = malloc(sizeof(int) * (*words + 1));
-  init_tab(alpha, *words, str); 
+  init_tab(alpha, *words, str);
   while (str[i] != '\0')
     {
       if (str[i] != ' ')

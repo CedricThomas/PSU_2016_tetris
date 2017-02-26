@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Wed Feb 22 09:46:31 2017
-** Last update Fri Feb 24 21:01:31 2017 
+** Last update Sat Feb 25 19:07:30 2017 
 */
 
 #include <stdlib.h>
@@ -51,35 +51,6 @@ static void	  my_free_rule(t_game_rules *my_rules, t_tetris tetris)
   free_tab(tetris.map);
 }
 
-int		setmap(t_tetris *tetris)
-{
-  int		y;
-  int		x;
-
-  if ((tetris->map = malloc(sizeof(char *) * (tetris->my_rules->map.y + 3)))
-      == NULL)
-    return (-1);
-  y = -1;
-  while (++y < tetris->my_rules->map.y + 2)
-    {
-      if ((tetris->map[y] =
-	   malloc(sizeof(char) * (tetris->my_rules->map.x + 3))) == NULL)
-	return (-1);
-      x = -1;
-      while (++x < tetris->my_rules->map.x + 2)
-	{
-	  if (y == 0  || y == tetris->my_rules->map.y + 1 ||
-	      x == 0 || x == tetris->my_rules->map.x + 1)
-	    tetris->map[y][x] = '#';
-	  else
-	    tetris->map[y][x] = ' ';
-	}
-      tetris->map[y][x] = 0;
-    }
-  tetris->map[y] = NULL;
-  return (0);
-}
-
 int		main(int ac, char **av)
 {
   t_game_rules	my_rules;
@@ -92,8 +63,6 @@ int		main(int ac, char **av)
     return (84);
   if (get_shape(&shape_list) == 84)
     return (84);
-  rrotate_matrix(&(shape_list[3]));
-  rrotate_matrix(&(shape_list[3]));
   if (my_rules.debug == 1)
     debug_mode(shape_list, &my_rules);
   tetris.my_rules = &my_rules;
