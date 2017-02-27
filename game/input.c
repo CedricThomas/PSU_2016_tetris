@@ -1,11 +1,11 @@
 /*
 ** input.c for input in /home/cedric/delivery/PSU/PSU_2016_tetris
-** 
-** Made by 
+**
+** Made by
 ** Login   <cedric.thomas@epitech.eu>
-** 
-** Started on  Sun Feb 26 13:32:53 2017 
-** Last update Sun Feb 26 17:08:57 2017 
+**
+** Started on  Sun Feb 26 13:32:53 2017
+** Last update Sun Feb 26 17:08:57 2017
 */
 
 #include <unistd.h>

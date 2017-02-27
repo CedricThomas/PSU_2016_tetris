@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Wed Feb 22 08:50:45 2017 Maxime Jenny
-** Last update Sun Feb 26 17:23:19 2017 Maxime Jenny
+** Last update Mon Feb 27 13:03:58 2017 Maxime Jenny
 */
 
 #include <sys/ioctl.h>
@@ -40,29 +40,51 @@ void		my_print_map(t_tetris *tetris, struct winsize size)
     }
 }
 
+int			check_events(t_tetris *tetris)
+{
+  if (tetris->status == 2)
+    return (-1);
+  return (0);
+}
+
+int			reset(t_input *my_inputs, t_tetris *tetris)
+{
+  reset_input(my_inputs);
+  return (0);
+}
+
+int			set_all(t_time *t, struct termio *termios)
+{
+  WINDOW		*win;
+
+  win = initscr();
+  curs_set(0);
+  keypad(win, 1);
+  my_set_term(termios);
+  set_time(t);
+}
+
 int			the_game(t_tetris *tetris,
 				 t_tetrimino *shape_list)
 {
   t_input		my_inputs;
   struct winsize	size;
   struct termio		termios;
-  WINDOW		*win;
   t_time		t;
+  int			game;
 
-  win = initscr();
-  curs_set(0);
-  keypad(win, 1);
-  my_set_term(&termios);
-  set_time(&t);
+  game = 1;
+  set_all(&t, &termios);
   if (set_input(&my_inputs, tetris) == 84)
     return (84);
-  while (1)
+  while (game)
     {
       try_input(&my_inputs, tetris);
+      game = (check_events(tetris) == -1) ? 0 : 1;
       ioctl(0, TIOCGWINSZ, &size);
       my_print_map(tetris, size);
       refresh();
       clear();
     }
-  reset_input(&my_inputs);
+  return (reset(&my_inputs, tetris));
 }

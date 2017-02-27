@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Mon Feb 20 20:44:55 2017
-** Last update Sun Feb 26 17:09:51 2017 
+** Last update Sun Feb 26 17:09:51 2017
 */
 #ifndef TETRIS_H_
 # define TETRIS_H_
@@ -79,10 +79,15 @@ typedef struct		s_game_rules
   int			debug;
 }			t_game_rules;
 
+/*
+** status : 0 in game | 1 in pause | 2 quit
+*/
+
 typedef struct		s_tetris
 {
   char			**map;
   t_game_rules		*my_rules;
+  int			status;
 }			t_tetris;
 
 typedef struct		s_input
