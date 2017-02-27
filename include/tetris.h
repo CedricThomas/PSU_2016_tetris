@@ -88,6 +88,7 @@ typedef struct		s_tetris
   char			**map;
   t_game_rules		*my_rules;
   int			status;
+  t_time		*t;
 }			t_tetris;
 
 typedef struct		s_input

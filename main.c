@@ -68,6 +68,7 @@ int		main(int ac, char **av)
   tetris.my_rules = &my_rules;
   if (setmap(&tetris) == -1)
     return (84);
+  tetris.status = 1;
   the_game(&tetris, shape_list);
   endwin();
   my_free_rule(&my_rules, tetris);

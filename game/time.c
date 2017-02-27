@@ -5,10 +5,12 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Wed Feb 22 14:57:00 2017 Maxime Jenny
-** Last update Fri Feb 24 18:09:56 2017 Maxime Jenny
+** Last update Mon Feb 27 19:01:54 2017 Maxime Jenny
 */
 
 #include <time.h>
+#include <ncurses.h>
+#include <curses.h>
 #include "tetris.h"
 #include "my_printf.h"
 
@@ -20,7 +22,6 @@ int		set_time(t_time *t)
 {
   t->first_time = 0;
   t->prec_time = 0;
-  t->time_before_pause = 0;
   return (0);
 }
 
@@ -40,8 +41,8 @@ int			interpret_time(t_time *t)
   unsigned long long	tim_e;
 
   tim_e = t->actual_time - t->first_time + t->time_before_pause;
-  if (t->prec_time != tim_e)
-    my_printf("%lu:%lu:%lu\n", tim_e / 3600, tim_e % 3600 / 60, tim_e % 60);
+    mvprintw(10, 10, "%.2lu:%.2lu:%.2lu", tim_e / 3600, tim_e % 3600 / 60,
+	      tim_e % 60);
   t->prec_time = tim_e;
   return (0);
 }

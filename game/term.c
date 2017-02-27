@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Fri Feb 24 18:13:37 2017 Maxime Jenny
-** Last update Sun Feb 26 17:24:18 2017 Maxime Jenny
+** Last update Mon Feb 27 18:53:49 2017 Maxime Jenny
 */
 
 #include <sys/ioctl.h>
@@ -17,11 +17,6 @@
 #include <stdlib.h>
 #include "tetris.h"
 #include "my.h"
-
-int		event(struct winsize size, t_tetris *tetris)
-{
-  return (0);
-}
 
 int			my_set_term(struct termio *termios)
 {

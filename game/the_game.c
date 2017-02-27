@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Wed Feb 22 08:50:45 2017 Maxime Jenny
-** Last update Mon Feb 27 13:03:58 2017 Maxime Jenny
+** Last update Mon Feb 27 19:00:40 2017 Maxime Jenny
 */
 
 #include <sys/ioctl.h>
@@ -24,20 +24,26 @@ void		my_print_map(t_tetris *tetris, struct winsize size)
 {
   int		y;
 
-  if (size.ws_col < tetris->my_rules->map.x + 3 ||
-	 size.ws_row < tetris->my_rules->map.y)
+  if (tetris->status == 1)
     {
-      mvprintw((size.ws_row / 2),
-	       (size.ws_col / 2) - 13, "%s", "Please, resize your terminal.");
+      if (size.ws_col < tetris->my_rules->map.x + 3 ||
+	  size.ws_row < tetris->my_rules->map.y)
+	mvprintw((size.ws_row / 2), (size.ws_col / 2) - 13,
+		 "%s", "Please, resize your terminal.");
+      else
+	{
+	  find_time(tetris->t);
+	  interpret_time(tetris->t);
+	  y = -1;
+	  while (++y < tetris->my_rules->map.y + 2)
+	    mvprintw((size.ws_row / 2) - (tetris->my_rules->map.y / 2) + y,
+		     (size.ws_col / 2) - (tetris->my_rules->map.y / 2), "%s",
+		     tetris->map[y]);
+	}
     }
-  else
-    {
-      y = -1;
-      while (++y < tetris->my_rules->map.y + 2)
-	mvprintw((size.ws_row / 2) - (tetris->my_rules->map.y / 2) + y,
-		 (size.ws_col / 2) - (tetris->my_rules->map.y / 2), "%s",
-		 tetris->map[y]);
-    }
+  else if (tetris->status == 0)
+    mvprintw((size.ws_row / 2), (size.ws_col / 2) - 5,
+	     "%s", "PAUSE");
 }
 
 int			check_events(t_tetris *tetris)
@@ -47,21 +53,27 @@ int			check_events(t_tetris *tetris)
   return (0);
 }
 
-int			reset(t_input *my_inputs, t_tetris *tetris)
+int			reset(t_input *my_inputs, t_tetris *tetris,
+			      struct termio termios)
 {
   reset_input(my_inputs);
+  my_reset_term(&termios);
   return (0);
 }
 
-int			set_all(t_time *t, struct termio *termios)
+int			set_all(t_tetris *tetris)
 {
   WINDOW		*win;
 
   win = initscr();
   curs_set(0);
   keypad(win, 1);
-  my_set_term(termios);
-  set_time(t);
+  mvprintw(10, 10, "00:00:00");
+  if ((tetris->t = malloc(sizeof(t_time))) == NULL)
+    return (-1);
+  tetris->t->time_before_pause = 0;
+  set_time(tetris->t);
+  return (0);
 }
 
 int			the_game(t_tetris *tetris,
@@ -70,15 +82,14 @@ int			the_game(t_tetris *tetris,
   t_input		my_inputs;
   struct winsize	size;
   struct termio		termios;
-  t_time		t;
   int			game;
 
   game = 1;
-  set_all(&t, &termios);
-  if (set_input(&my_inputs, tetris) == 84)
+  if (set_all(tetris) == -1 || set_input(&my_inputs, tetris) == 84)
     return (84);
   while (game)
     {
+      my_set_term(&termios);
       try_input(&my_inputs, tetris);
       game = (check_events(tetris) == -1) ? 0 : 1;
       ioctl(0, TIOCGWINSZ, &size);
@@ -86,5 +97,5 @@ int			the_game(t_tetris *tetris,
       refresh();
       clear();
     }
-  return (reset(&my_inputs, tetris));
+  return (reset(&my_inputs, tetris, termios));
 }
