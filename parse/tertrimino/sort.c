@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Fri Feb 24 21:05:11 2017 
-** Last update Fri Feb 24 21:30:38 2017 
+** Last update Mon Feb 27 17:50:21 2017 
 */
 #include <stdlib.h>
 #include "tetris.h"
@@ -30,9 +30,10 @@ void	sort_tetri(t_tetrimino **shape_list)
     {
       i = 0;
       action = 0;
-      while ((*shape_list)[++i].name != NULL)
+      while ((*shape_list)[i].name && (*shape_list)[++i].name != NULL)
 	{
-	  if (my_strcmp((*shape_list)[i - 1].name, (*shape_list)[i].name) > 0)
+	  if ((*shape_list)[i - 1].name &&
+	      my_strcmp((*shape_list)[i - 1].name, (*shape_list)[i].name) > 0)
 	    {
 	      action = 1;
 	      swap_tetri(shape_list, i - 1, i);
