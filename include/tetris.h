@@ -90,8 +90,8 @@ typedef struct		s_tetris
   int			status;
   t_time		*t;
   int			*levels;
-  t_tetrimino		actual_tetra;
-  t_tetrimino		next_tetra;
+  t_tetrimino		*actual_tetra;
+  t_tetrimino		*next_tetra;
 }			t_tetris;
 
 typedef struct		s_input
@@ -113,6 +113,8 @@ int	debug_mode(t_tetrimino *form_list, t_game_rules *my_rules);
 /*
 ** GAME
 */
+
+int		tetra(t_tetris *tetris, t_tetrimino *shape_list);
 
 /*
 **the_game.c

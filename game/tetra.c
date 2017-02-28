@@ -5,11 +5,12 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Mon Feb 27 22:05:39 2017 Maxime Jenny
-** Last update Mon Feb 27 22:36:56 2017 Maxime Jenny
+** Last update Tue Feb 28 11:38:31 2017 Maxime Jenny
 */
 
 #include <unistd.h>
 #include <stdlib.h>
+#include <time.h>
 #include "tetris.h"
 #include "my.h"
 
@@ -22,16 +23,16 @@ int		roll_a_tetra(t_tetrimino *shape_list, t_tetris *tetris,
 
   i = 0;
   good = 0;
-  srand(getpid() * time() * getpid() * 9 * time() * time() % 25 * getpid());
+  srand(getpid() * time(NULL) * getpid() * 9 * time(NULL));
   while (shape_list[++i].name != NULL);
   while (!good)
     {
       tmp = rand() % i;
-      if (shape_list[tmp].error == 1)
+      if (shape_list[tmp].valid == 1)
 	continue;
       good = 1;
     }
-  tetra = shape_list[tmp];
+  tetra = &shape_list[tmp];
 }
 
 int		tetra(t_tetris *tetris, t_tetrimino *shape_list)
