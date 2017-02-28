@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Mon Feb 20 22:23:37 2017
-** Last update Sun Feb 26 15:30:57 2017
+** Last update Tue Feb 28 13:23:39 2017 
 */
 #include <ncurses.h>
 #include <stdlib.h>
@@ -106,6 +106,9 @@ static int	get_default_gamerules(t_game_rules *my_rules)
 
 static int	check_new_rules(t_game_rules *my_rules)
 {
+  int		j;
+  int		i;
+
   if (my_rules->level <= 0 || my_rules->level > 10)
     {
       my_puterror("Error : level must be between 1 and 10\n");
@@ -113,6 +116,19 @@ static int	check_new_rules(t_game_rules *my_rules)
     }
   if (my_rules->map.x <= 0 || my_rules->map.y <= 0)
     return (84);
+  i = 0;
+  while (++i < 7)
+    {
+      j = 0;
+      while (++j < 7)
+	if (i != j && !my_strncmp(*((char **)myparse[i].value),
+				  *((char **)myparse[j].value),
+				  my_strlen(*((char **)myparse[i].value))))
+	  {
+	    my_puterror("Error : severals sequences start with the same values\n");
+	    return (84);
+	  }
+    }
   return (0);
 }
 

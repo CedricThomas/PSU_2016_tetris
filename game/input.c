@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Sun Feb 26 13:32:53 2017
-** Last update Sun Feb 26 17:08:57 2017
+** Last update Tue Feb 28 09:59:11 2017 
 */
 
 #include <unistd.h>
@@ -39,12 +39,12 @@ int		set_input(t_input *my_inputs, t_tetris *tetris)
 
 int	try_input(t_input *my_inputs, t_tetris *tetris)
 {
-  char	buffer[1000];
+  char	buffer[2];
   int	match;
   int	i;
 
   i = -1;
-  if ((match = read(0, buffer, 999)) != 0)
+  if ((match = read(0, buffer, 1)) != 0)
     {
       buffer[match] = 0;
       my_inputs->input = my_strcatdup(my_inputs->input, buffer, 1);
