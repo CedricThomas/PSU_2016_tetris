@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Wed Feb 22 08:50:45 2017 Maxime Jenny
-** Last update Mon Feb 27 22:13:57 2017 Maxime Jenny
+** Last update Tue Feb 28 13:18:05 2017 Maxime Jenny
 */
 
 #include <sys/ioctl.h>
@@ -88,7 +88,7 @@ int			the_game(t_tetris *tetris,
       game = (tetris->status == 2) ? 0 : 1;
       ioctl(0, TIOCGWINSZ, &size);
       my_print_map(tetris, size);
-      tetra(tetris, shape_list);
+      tetra(tetris, shape_list, size);
       refresh();
       clear();
     }

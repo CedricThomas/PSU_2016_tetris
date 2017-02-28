@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Mon Feb 27 22:05:39 2017 Maxime Jenny
-** Last update Tue Feb 28 11:38:31 2017 Maxime Jenny
+** Last update Tue Feb 28 13:22:18 2017 Maxime Jenny
 */
 
 #include <unistd.h>
@@ -35,10 +35,13 @@ int		roll_a_tetra(t_tetrimino *shape_list, t_tetris *tetris,
   tetra = &shape_list[tmp];
 }
 
-int		tetra(t_tetris *tetris, t_tetrimino *shape_list)
+int		tetra(t_tetris *tetris, t_tetrimino *shape_list,
+		      struct winsize size)
 {
   if (tetris->actual_tetra == NULL)
     {
+      tetris->pos_tetra.x = tetris->my_rules->map.x / 2 + size.ws_col / 2;
+      tetris->pos_tetra.y = size.ws_row / 2 - tetris->my_rules->map.y / 2;
       if (tetris->next_tetra != NULL)
 	{
 	  tetris->actual_tetra = tetris->next_tetra;
