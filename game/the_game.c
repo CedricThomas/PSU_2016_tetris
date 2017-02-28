@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Wed Feb 22 08:50:45 2017 Maxime Jenny
-** Last update Mon Feb 27 19:00:40 2017 Maxime Jenny
+** Last update Mon Feb 27 22:13:57 2017 Maxime Jenny
 */
 
 #include <sys/ioctl.h>
@@ -26,14 +26,16 @@ void		my_print_map(t_tetris *tetris, struct winsize size)
 
   if (tetris->status == 1)
     {
-      if (size.ws_col < tetris->my_rules->map.x + 3 ||
-	  size.ws_row < tetris->my_rules->map.y)
-	mvprintw((size.ws_row / 2), (size.ws_col / 2) - 13,
-		 "%s", "Please, resize your terminal.");
+      if (size.ws_col < tetris->my_rules->map.x + 2 ||
+	  size.ws_row < tetris->my_rules->map.y + 2)
+	{
+          my_pause(tetris);
+	}
       else
 	{
 	  find_time(tetris->t);
 	  interpret_time(tetris->t);
+	  tetris->status = 1;
 	  y = -1;
 	  while (++y < tetris->my_rules->map.y + 2)
 	    mvprintw((size.ws_row / 2) - (tetris->my_rules->map.y / 2) + y,
@@ -42,15 +44,7 @@ void		my_print_map(t_tetris *tetris, struct winsize size)
 	}
     }
   else if (tetris->status == 0)
-    mvprintw((size.ws_row / 2), (size.ws_col / 2) - 5,
-	     "%s", "PAUSE");
-}
-
-int			check_events(t_tetris *tetris)
-{
-  if (tetris->status == 2)
-    return (-1);
-  return (0);
+    mvprintw((size.ws_row / 2), (size.ws_col / 2) - 5, "%s", "PAUSE");
 }
 
 int			reset(t_input *my_inputs, t_tetris *tetris,
@@ -91,9 +85,10 @@ int			the_game(t_tetris *tetris,
     {
       my_set_term(&termios);
       try_input(&my_inputs, tetris);
-      game = (check_events(tetris) == -1) ? 0 : 1;
+      game = (tetris->status == 2) ? 0 : 1;
       ioctl(0, TIOCGWINSZ, &size);
       my_print_map(tetris, size);
+      tetra(tetris, shape_list);
       refresh();
       clear();
     }

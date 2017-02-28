@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Wed Feb 22 09:16:27 2017 Maxime Jenny
-** Last update Mon Feb 27 09:20:47 2017 Maxime Jenny
+** Last update Mon Feb 27 22:23:30 2017 Maxime Jenny
 */
 
 #include <stdlib.h>
@@ -34,7 +34,7 @@ int		debug_mode(t_tetrimino *form_list, t_game_rules *my_rules)
   my_printf("Size :   %d*%d\n", my_rules->map.x, my_rules->map.y);
   i = -1;
   while (form_list[++i].name != NULL);
-  my_printf("Tetriminos : %d\n", i);
+  my_printf("Tetriminos : %d\n", i + 1);
   i = -1;
   while (form_list[++i].name != NULL)
     show_tetri(&form_list[i]);

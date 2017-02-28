@@ -14,7 +14,7 @@ void	my_pause(t_tetris *tetris)
 {
   if (tetris->status == 1)
     {
-      tetris->t->time_before_pause = tetris->t->prec_time;
+      tetris->t->time_before_pause  = tetris->t->prec_time;
       tetris->status = 0;
     }
   else
@@ -26,6 +26,5 @@ void	my_pause(t_tetris *tetris)
 
 void	my_quit(t_tetris *tetris)
 {
-  mvprintw(0, 0, "quit");
   tetris->status = 2;
 }

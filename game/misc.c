@@ -1,11 +1,11 @@
 /*
 ** misc.c for tetris in /home/cedric/delivery/PSU/PSU_2016_tetris
-** 
-** Made by 
+**
+** Made by
 ** Login   <cedric.thomas@epitech.eu>
-** 
-** Started on  Sat Feb 25 19:07:15 2017 
-** Last update Sat Feb 25 19:19:42 2017 
+**
+** Started on  Sat Feb 25 19:07:15 2017
+** Last update Sat Feb 25 19:19:42 2017
 */
 #include <stdlib.h>
 #include "tetris.h"
@@ -38,4 +38,3 @@ int		setmap(t_tetris *tetris)
   tetris->map[y] = NULL;
   return (0);
 }
-

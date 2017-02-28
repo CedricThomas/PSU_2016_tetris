@@ -5,7 +5,7 @@
 ## Login   <cedric@epitech.net>
 ##
 ## Started on  Sat Oct 22 10:37:32 2016 Cédric Thomas
-## Last update Sun Feb 26 15:49:45 2017
+## Last update Mon Feb 27 22:07:00 2017 Maxime Jenny
 ##
 
 SRC	=	main.c				\
@@ -28,7 +28,8 @@ SRC	=	main.c				\
 		game/term.c			\
 		game/events_gameplay.c		\
 		game/events_status.c		\
-		game/input.c
+		game/input.c			\
+		game/tetra.c
 
 OBJ	=	$(SRC:.c=.o)
 

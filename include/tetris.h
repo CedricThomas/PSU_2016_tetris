@@ -89,6 +89,9 @@ typedef struct		s_tetris
   t_game_rules		*my_rules;
   int			status;
   t_time		*t;
+  int			*levels;
+  t_tetrimino		actual_tetra;
+  t_tetrimino		next_tetra;
 }			t_tetris;
 
 typedef struct		s_input
