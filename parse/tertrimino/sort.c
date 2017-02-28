@@ -5,8 +5,9 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Fri Feb 24 21:05:11 2017 
-** Last update Tue Feb 28 20:33:51 2017 
+** Last update Tue Feb 28 21:07:02 2017 
 */
+#include <term.h>
 #include <curses.h>
 #include <stdlib.h>
 #include "tetris.h"
@@ -49,7 +50,7 @@ int	check_color(t_tetrimino **shape_list)
   int	i;
 
   i = -1;
-  initscr();
+  setupterm(NULL, 0, NULL);
   start_color();
   colors = COLORS;
   endwin();

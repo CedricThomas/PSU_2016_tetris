@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Wed Feb 22 09:46:31 2017
-** Last update Tue Feb 28 18:23:09 2017 
+** Last update Tue Feb 28 21:02:56 2017 
 */
 
 #include <stdlib.h>
@@ -42,12 +42,12 @@ int	help(int jump)
 
 static void	  my_free_rule(t_game_rules *my_rules, t_tetris tetris)
 {
-  free(my_rules->key_left);
-  free(my_rules->key_right);
-  free(my_rules->key_turn);
-  free(my_rules->key_drop);
-  free(my_rules->key_quit);
-  free(my_rules->key_pause);
+  free(my_rules->mkey_left);
+  free(my_rules->mkey_right);
+  free(my_rules->mkey_turn);
+  free(my_rules->mkey_drop);
+  free(my_rules->mkey_quit);
+  free(my_rules->mkey_pause);
   free_tab(tetris.map);
 }
 

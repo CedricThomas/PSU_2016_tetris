@@ -5,7 +5,7 @@
 ** Login   <cedric@epitech.net>
 ** 
 ** Started on  Thu Oct 13 11:14:10 2016 Cédric Thomas
-** Last update Mon Feb 20 21:43:57 2017 
+** Last update Tue Feb 28 21:05:35 2017 
 */
 
 #ifndef MY_H_
@@ -18,7 +18,7 @@ int		my_swap(int *a, int *b);
 int		my_putstr(char *str);
 int		my_strlen(char *str);
 int		my_getnbr(char *str);
-void		my_sort_int_tab(int *tab, int size);
+void		my_sort_int_tab(int *mtab, int size);
 int		my_power_rec(int nb, int power);
 int		my_square_root(int nb);
 int		my_is_prime(int nombre);
@@ -41,7 +41,7 @@ int		my_showstr(char *str);
 int		my_showmem(char *str, int size);
 char		*my_strcat(char *dest, char *src);
 char		*my_strncat(char *dest, char *src, int nb);
-int		my_show_wordtab(char **tab);
+int		my_show_wordtab(char **mtab);
 char		**my_str_to_wordtab(char *str);
 char		**my_split(char *str, char sep);
 char		*my_strdup(char *src);
@@ -50,7 +50,7 @@ char		*convert_base(char *nbr, char *base_from, char *base_to);
 void		my_memset(char *, int, int);
 int		is_in(char c, char *str);
 int		is_nb(char c);
-void		free_tab(char **tab);
+void		free_tab(char **mtab);
 void		my_puterror(char *str);
 int		is_betwr(int a, int nb, int b);
 int		is_betw(int a, int nb, int b);

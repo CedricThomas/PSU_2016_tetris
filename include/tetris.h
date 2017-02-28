@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Mon Feb 20 20:44:55 2017
-** Last update Tue Feb 28 20:15:37 2017 
+** Last update Tue Feb 28 21:04:34 2017 
 */
 #ifndef TETRIS_H_
 # define TETRIS_H_
@@ -67,12 +67,12 @@ typedef struct		s_parse
 
 typedef struct		s_game_rules
 {
-  char			*key_left;
-  char			*key_right;
-  char			*key_turn;
-  char			*key_drop;
-  char			*key_quit;
-  char			*key_pause;
+  char			*mkey_left;
+  char			*mkey_right;
+  char			*mkey_turn;
+  char			*mkey_drop;
+  char			*mkey_quit;
+  char			*mkey_pause;
   int			level;
   t_vector2i		map;
   int			next;
@@ -224,7 +224,7 @@ int		fill_shape(int fd, char **header,
 DIR		*my_opendir(char *path);
 int		my_open(char *path);
 char		*cut_ext(char *file, char *ext);
-int		my_len_sum(char **tab);
+int		my_len_sum(char **mtab);
 int		clean_gnl(int fd);
 
 /*
@@ -268,7 +268,7 @@ int	is_an_int(char *str);
 
 char	**fd_to_tab(int fd, int h);
 int	is_only_composed_of(char *str1, char *str2);
-char	**realloc_tab(char **tab, int size);
+char	**realloc_tab(char **mtab, int size);
 
 
 #endif /* !TETRIS_H_ */
