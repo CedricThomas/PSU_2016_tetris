@@ -5,8 +5,9 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Fri Feb 24 21:05:11 2017 
-** Last update Tue Feb 28 11:35:27 2017 
+** Last update Tue Feb 28 20:33:51 2017 
 */
+#include <curses.h>
 #include <stdlib.h>
 #include "tetris.h"
 #include "my.h"
@@ -39,5 +40,22 @@ void	sort_tetri(t_tetrimino **shape_list)
 	      swap_tetri(shape_list, i - 1, i);
 	    }
 	}
+    }
+}
+
+int	check_color(t_tetrimino **shape_list)
+{
+  int	colors;
+  int	i;
+
+  i = -1;
+  initscr();
+  start_color();
+  colors = COLORS;
+  endwin();
+  while ((*shape_list)[++i].name != NULL)
+    {
+      if ((*shape_list)[i].color < 0 || (*shape_list)[i].color >= colors)
+	(*shape_list)[i].valid = 0;
     }
 }
