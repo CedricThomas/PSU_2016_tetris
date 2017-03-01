@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Wed Feb 22 09:46:31 2017
-** Last update Tue Feb 28 22:16:23 2017 
+** Last update Tue Feb 28 22:16:23 2017
 */
 
 #include <stdlib.h>
@@ -62,7 +62,7 @@ int		set_levels(t_tetris *tetris)
   i = 0;
   while (i < 10)
     {
-      tetris->levels[i] = 4500;
+      tetris->levels[i] = 4500 - i * 100;
       i++;
     }
   return (0);

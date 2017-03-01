@@ -1,11 +1,11 @@
 /*
 ** sort.c for tetris in /home/cedric/delivery/PSU/PSU_2016_tetris/parse/tertrimino
-** 
-** Made by 
+**
+** Made by
 ** Login   <cedric.thomas@epitech.eu>
-** 
-** Started on  Fri Feb 24 21:05:11 2017 
-** Last update Wed Mar  1 15:28:29 2017 
+**
+** Started on  Fri Feb 24 21:05:11 2017
+** Last update Wed Mar  1 15:28:29 2017
 */
 #include <term.h>
 #include <curses.h>
