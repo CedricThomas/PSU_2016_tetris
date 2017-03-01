@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Wed Feb 22 09:16:27 2017 Maxime Jenny
-** Last update Mon Feb 27 22:23:30 2017 Maxime Jenny
+** Last update Tue Feb 28 21:06:05 2017 
 */
 
 #include <stdlib.h>
@@ -23,12 +23,12 @@ int		debug_mode(t_tetrimino *form_list, t_game_rules *my_rules)
   char		buf;
 
   my_printf("*** DEBUG MODE ***\n");
-  my_printf("Key Left :   %s\n", my_rules->key_left);
-  my_printf("Key Right :   %s\n", my_rules->key_right);
-  my_printf("Key Turn :   %s\n", my_rules->key_turn);
-  my_printf("Key Drop :   %s\n", my_rules->key_drop);
-  my_printf("Key Quit :   %s\n", my_rules->key_quit);
-  my_printf("Key Pause :   %s\n", my_rules->key_pause);
+  my_printf("Key Left :   %s\n", my_rules->mkey_left);
+  my_printf("Key Right :   %s\n", my_rules->mkey_right);
+  my_printf("Key Turn :   %s\n", my_rules->mkey_turn);
+  my_printf("Key Drop :   %s\n", my_rules->mkey_drop);
+  my_printf("Key Quit :   %s\n", my_rules->mkey_quit);
+  my_printf("Key Pause :   %s\n", my_rules->mkey_pause);
   my_printf("Next :   %s\n", (my_rules->next) ? ("Yes") : ("No"));
   my_printf("Level :   %d\n", my_rules->level);
   my_printf("Size :   %d*%d\n", my_rules->map.x, my_rules->map.y);

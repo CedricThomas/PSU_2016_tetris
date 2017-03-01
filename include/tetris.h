@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Mon Feb 20 20:44:55 2017
-** Last update Sun Feb 26 17:09:51 2017
+** Last update Tue Feb 28 22:18:38 2017 
 */
 #ifndef TETRIS_H_
 # define TETRIS_H_
@@ -67,12 +67,12 @@ typedef struct		s_parse
 
 typedef struct		s_game_rules
 {
-  char			*key_left;
-  char			*key_right;
-  char			*key_turn;
-  char			*key_drop;
-  char			*key_quit;
-  char			*key_pause;
+  char			*mkey_left;
+  char			*mkey_right;
+  char			*mkey_turn;
+  char			*mkey_drop;
+  char			*mkey_quit;
+  char			*mkey_pause;
   int			level;
   t_vector2i		map;
   int			next;
@@ -104,8 +104,7 @@ typedef struct		s_input
   char			*input;
 }			t_input;
 
-int	help(int jump);
-
+int	help(int jump, char *name);
 
 /*
 ** DEBUG_MODE/debug.c
@@ -226,7 +225,7 @@ int		fill_shape(int fd, char **header,
 DIR		*my_opendir(char *path);
 int		my_open(char *path);
 char		*cut_ext(char *file, char *ext);
-int		my_len_sum(char **tab);
+int		my_len_sum(char **mtab);
 int		clean_gnl(int fd);
 
 /*
@@ -234,6 +233,7 @@ int		clean_gnl(int fd);
 */
 
 void		sort_tetri(t_tetrimino **shape_list);
+int		check_color(t_tetrimino **shape_list);
 
 /*
 **MATH
@@ -269,7 +269,7 @@ int	is_an_int(char *str);
 
 char	**fd_to_tab(int fd, int h);
 int	is_only_composed_of(char *str1, char *str2);
-char	**realloc_tab(char **tab, int size);
+char	**realloc_tab(char **mtab, int size);
 
 
 #endif /* !TETRIS_H_ */

@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Sun Feb 26 13:32:53 2017
-** Last update Sun Feb 26 17:08:57 2017
+** Last update Tue Feb 28 21:06:26 2017 
 */
 
 #include <unistd.h>
@@ -23,12 +23,12 @@ int		set_input(t_input *my_inputs, t_tetris *tetris)
   if ((my_inputs->fct = malloc(sizeof(my_inputs->fct) * INPUT_NB)) == NULL)
     return (84);
   my_inputs->input = NULL;
-  my_inputs->sequence[0] = rules->key_left;
-  my_inputs->sequence[1] = rules->key_right;
-  my_inputs->sequence[2] = rules->key_turn;
-  my_inputs->sequence[3] = rules->key_drop;
-  my_inputs->sequence[4] = rules->key_quit;
-  my_inputs->sequence[5] = rules->key_pause;
+  my_inputs->sequence[0] = rules->mkey_left;
+  my_inputs->sequence[1] = rules->mkey_right;
+  my_inputs->sequence[2] = rules->mkey_turn;
+  my_inputs->sequence[3] = rules->mkey_drop;
+  my_inputs->sequence[4] = rules->mkey_quit;
+  my_inputs->sequence[5] = rules->mkey_pause;
   my_inputs->fct[0] = &my_left;
   my_inputs->fct[1] = &my_right;
   my_inputs->fct[2] = &my_turn;
@@ -39,12 +39,12 @@ int		set_input(t_input *my_inputs, t_tetris *tetris)
 
 int	try_input(t_input *my_inputs, t_tetris *tetris)
 {
-  char	buffer[1000];
+  char	buffer[2];
   int	match;
   int	i;
 
   i = -1;
-  if ((match = read(0, buffer, 999)) != 0)
+  if ((match = read(0, buffer, 1)) != 0)
     {
       buffer[match] = 0;
       my_inputs->input = my_strcatdup(my_inputs->input, buffer, 1);

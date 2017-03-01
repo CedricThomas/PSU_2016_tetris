@@ -5,9 +5,10 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Mon Feb 20 22:23:37 2017
-** Last update Sun Feb 26 15:30:57 2017
+** Last update Tue Feb 28 22:17:57 2017 
 */
-#include <ncurses.h>
+#include <term.h>
+#include <curses.h>
 #include <stdlib.h>
 #include "my.h"
 #include "my_printf.h"
@@ -31,17 +32,17 @@ static void	link_pointers(t_game_rules *my_rules)
 {
   myparse[0].value = &(my_rules->level);
   myparse[0].type = PVALUE;
-  myparse[1].value = &(my_rules->key_left);
+  myparse[1].value = &(my_rules->mkey_left);
   myparse[1].type = PKEY;
-  myparse[2].value = &(my_rules->key_right);
+  myparse[2].value = &(my_rules->mkey_right);
   myparse[2].type = PKEY;
-  myparse[3].value = &(my_rules->key_turn);
+  myparse[3].value = &(my_rules->mkey_turn);
   myparse[3].type = PKEY;
-  myparse[4].value = &(my_rules->key_drop);
+  myparse[4].value = &(my_rules->mkey_drop);
   myparse[4].type = PKEY;
-  myparse[5].value = &(my_rules->key_quit);
+  myparse[5].value = &(my_rules->mkey_quit);
   myparse[5].type = PKEY;
-  myparse[6].value = &(my_rules->key_pause);
+  myparse[6].value = &(my_rules->mkey_pause);
   myparse[6].type = PKEY;
   myparse[7].value = &(my_rules->map);
   myparse[7].type = PVECTOR;
@@ -76,26 +77,26 @@ static int	cmp_args(char **args, int ac,
     {
       my_puterror(args[i - 1]);
       my_puterror(" is an invalid argument\n");
-      help(1);
+      help(1, args[0]);
     }
   return (exitval ? 1 : 0);
 }
 
 static int	get_default_gamerules(t_game_rules *my_rules)
 {
-  initscr();
+  setupterm(NULL, 0, NULL);
   my_rules->level = 1;
-  if ((my_rules->key_left = my_strdup(tigetstr("kcub1"))) == NULL)
+  if ((my_rules->mkey_left = my_strdup(tigetstr("kcub1"))) == NULL)
     return (84);
-  if ((my_rules->key_right = my_strdup(tigetstr("kcuf1"))) == NULL)
+  if ((my_rules->mkey_right = my_strdup(tigetstr("kcuf1"))) == NULL)
     return (84);
-  if ((my_rules->key_turn = my_strdup(tigetstr("kcuu1"))) == NULL)
+  if ((my_rules->mkey_turn = my_strdup(tigetstr("kcuu1"))) == NULL)
     return (84);
-  if ((my_rules->key_drop = my_strdup(tigetstr("kcud1"))) == NULL)
+  if ((my_rules->mkey_drop = my_strdup(tigetstr("kcud1"))) == NULL)
     return (84);
-  if ((my_rules->key_quit = my_strdup("q")) == NULL)
+  if ((my_rules->mkey_quit = my_strdup("q")) == NULL)
     return (84);
-  if ((my_rules->key_pause = my_strdup(" ")) == NULL)
+  if ((my_rules->mkey_pause = my_strdup(" ")) == NULL)
     return (84);
   my_rules->map = myvector2i(10, 20);
   my_rules->next = FALSE;
@@ -106,6 +107,9 @@ static int	get_default_gamerules(t_game_rules *my_rules)
 
 static int	check_new_rules(t_game_rules *my_rules)
 {
+  int		j;
+  int		i;
+
   if (my_rules->level <= 0 || my_rules->level > 10)
     {
       my_puterror("Error : level must be between 1 and 10\n");
@@ -113,6 +117,19 @@ static int	check_new_rules(t_game_rules *my_rules)
     }
   if (my_rules->map.x <= 0 || my_rules->map.y <= 0)
     return (84);
+  i = 0;
+  while (++i < 7)
+    {
+      j = 0;
+      while (++j < 7)
+	if (i != j && !my_strncmp(*((char **)myparse[i].value),
+				  *((char **)myparse[j].value),
+				  my_strlen(*((char **)myparse[i].value))))
+	  {
+	    my_puterror("Error : severals sequences start with the same values\n");
+	    return (84);
+	  }
+    }
   return (0);
 }
 

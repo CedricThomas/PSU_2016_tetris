@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Wed Feb 22 09:46:31 2017
-** Last update Sun Feb 26 16:19:43 2017
+** Last update Tue Feb 28 22:16:23 2017 
 */
 
 #include <stdlib.h>
@@ -13,11 +13,13 @@
 #include "tetris.h"
 #include "my.h"
 
-int	help(int jump)
+int	help(int jump, char *name)
 {
   if (jump == 1)
     my_putchar('\n');
-  my_putstr("Usage: ./tetris [option]\nOptions:\n");
+  my_putstr("Usage: ");
+  my_putstr(name);
+  my_putstr(" [option]\nOptions:\n");
   my_putstr("  --help\t\tDisplay this help\n");
   my_putstr("  -l --level={num}\tStart at level num\n");
   my_putstr("  -kl --key-left={K}");
@@ -42,12 +44,12 @@ int	help(int jump)
 
 static void	  my_free_rule(t_game_rules *my_rules, t_tetris tetris)
 {
-  free(my_rules->key_left);
-  free(my_rules->key_right);
-  free(my_rules->key_turn);
-  free(my_rules->key_drop);
-  free(my_rules->key_quit);
-  free(my_rules->key_pause);
+  free(my_rules->mkey_left);
+  free(my_rules->mkey_right);
+  free(my_rules->mkey_turn);
+  free(my_rules->mkey_drop);
+  free(my_rules->mkey_quit);
+  free(my_rules->mkey_pause);
   free_tab(tetris.map);
 }
 
@@ -73,7 +75,7 @@ int		main(int ac, char **av)
   t_tetris	tetris;
 
   if (ac == 2 && !my_strcmp("--help", av[1]))
-    return (help(0));
+    return (help(0, av[0]));
   if (get_gamerules(&my_rules, av, ac) == 84)
     return (84);
   if (get_shape(&shape_list) == 84)
