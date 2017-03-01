@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Wed Feb 22 13:41:55 2017 
-** Last update Thu Feb 23 16:10:46 2017 
+** Last update Tue Feb 28 23:18:09 2017 
 */
 #include <stdlib.h>
 #include "my.h"
@@ -99,9 +99,10 @@ int		fill_shape(int fd, char **header,
   i = -1;
   while (++i + size_h.x <= size_h.y)
     {
-      j = -1;      
+      j = -1;
       while (++j + size_w.x <= size_w.y)
-	(*shape_list)[index].matrix[i][j] = get_char(tab[i + size_h.x], j + size_w.x);
+	(*shape_list)[index].matrix[i][j] = get_char(tab[i + size_h.x],
+						     j + size_w.x);
     }
   free_tab(tab);
   return (0);

@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Wed Feb 22 09:46:31 2017
-** Last update Tue Feb 28 21:02:56 2017 
+** Last update Tue Feb 28 22:16:23 2017 
 */
 
 #include <stdlib.h>
@@ -13,11 +13,13 @@
 #include "tetris.h"
 #include "my.h"
 
-int	help(int jump)
+int	help(int jump, char *name)
 {
   if (jump == 1)
     my_putchar('\n');
-  my_putstr("Usage: ./tetris [option]\nOptions:\n");
+  my_putstr("Usage: ");
+  my_putstr(name);
+  my_putstr(" [option]\nOptions:\n");
   my_putstr("  --help\t\tDisplay this help\n");
   my_putstr("  -l --level={num}\tStart at level num\n");
   my_putstr("  -kl --key-left={K}");
@@ -58,7 +60,7 @@ int		main(int ac, char **av)
   t_tetris	tetris;
 
   if (ac == 2 && !my_strcmp("--help", av[1]))
-    return (help(0));
+    return (help(0, av[0]));
   if (get_gamerules(&my_rules, av, ac) == 84)
     return (84);
   if (get_shape(&shape_list) == 84)

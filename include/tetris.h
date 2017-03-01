@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Mon Feb 20 20:44:55 2017
-** Last update Tue Feb 28 21:04:34 2017 
+** Last update Tue Feb 28 22:18:38 2017 
 */
 #ifndef TETRIS_H_
 # define TETRIS_H_
@@ -102,8 +102,7 @@ typedef struct		s_input
   char			*input;
 }			t_input;
 
-int	help(int jump);
-
+int	help(int jump, char *name);
 
 /*
 ** DEBUG_MODE/debug.c

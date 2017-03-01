@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Mon Feb 20 22:23:37 2017
-** Last update Tue Feb 28 21:03:23 2017 
+** Last update Tue Feb 28 22:17:57 2017 
 */
 #include <term.h>
 #include <curses.h>
@@ -77,7 +77,7 @@ static int	cmp_args(char **args, int ac,
     {
       my_puterror(args[i - 1]);
       my_puterror(" is an invalid argument\n");
-      help(1);
+      help(1, args[0]);
     }
   return (exitval ? 1 : 0);
 }
