@@ -90,9 +90,11 @@ typedef struct		s_tetris
   int			status;
   t_time		*t;
   int			*levels;
+  int			index;
   t_tetrimino		*actual_tetra;
   t_tetrimino		*next_tetra;
   t_vector2i		pos_tetra;
+  t_vector2i		term_size;
 }			t_tetris;
 
 typedef struct		s_input

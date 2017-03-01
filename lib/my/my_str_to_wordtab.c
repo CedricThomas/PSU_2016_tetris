@@ -1,11 +1,11 @@
 /*
 ** my_str_to_wordtab.c for CPool_Day08.c in /home/cedric/delivery/CPool_Day08/task04
-** 
+**
 ** Made by Cédric Thomas
 ** Login   <cedric@epitech.net>
-** 
+**
 ** Started on  Wed Oct 12 12:19:23 2016 Cédric Thomas
-** Last update Sat Feb 25 19:02:54 2017 
+** Last update Sat Feb 25 19:02:54 2017
 */
 #include <stdlib.h>
 #include "my.h"

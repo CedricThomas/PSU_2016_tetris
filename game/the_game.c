@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Wed Feb 22 08:50:45 2017 Maxime Jenny
-** Last update Tue Feb 28 13:18:05 2017 Maxime Jenny
+** Last update Wed Mar  1 17:04:24 2017 Maxime Jenny
 */
 
 #include <sys/ioctl.h>
@@ -16,6 +16,7 @@
 #include <curses.h>
 #include <unistd.h>
 #include <termio.h>
+#include <time.h>
 #include <stdlib.h>
 #include "tetris.h"
 #include "my.h"
@@ -63,6 +64,19 @@ int			set_all(t_tetris *tetris)
   curs_set(0);
   keypad(win, 1);
   mvprintw(10, 10, "00:00:00");
+  start_color();
+  init_pair(0, COLOR_BLACK, COLOR_BLACK);
+  init_pair(1, COLOR_RED, COLOR_RED);
+  init_pair(2, COLOR_BLUE, COLOR_BLUE);
+  init_pair(3, COLOR_MAGENTA, COLOR_MAGENTA);
+  init_pair(4, COLOR_GREEN, COLOR_GREEN);
+  init_pair(5, COLOR_YELLOW, COLOR_YELLOW);
+  init_pair(6, COLOR_CYAN, COLOR_CYAN);
+  init_pair(7, COLOR_WHITE, COLOR_WHITE);
+  init_pair(8, COLOR_WHITE, COLOR_BLACK);
+  init_pair(9, 40, 40);
+  tetris->actual_tetra = NULL;
+  tetris->next_tetra = NULL;
   if ((tetris->t = malloc(sizeof(t_time))) == NULL)
     return (-1);
   tetris->t->time_before_pause = 0;
@@ -79,16 +93,18 @@ int			the_game(t_tetris *tetris,
   int			game;
 
   game = 1;
+  srand(getpid() * time(NULL) * getpid() * 9 * time(NULL));
   if (set_all(tetris) == -1 || set_input(&my_inputs, tetris) == 84)
     return (84);
-  while (game)
+  while (tetris->status != 2)
     {
+      ioctl(0, TIOCGWINSZ, &size);
+      tetris->term_size.x = size.ws_col;
+      tetris->term_size.y = size.ws_row;
       my_set_term(&termios);
       try_input(&my_inputs, tetris);
-      game = (tetris->status == 2) ? 0 : 1;
-      ioctl(0, TIOCGWINSZ, &size);
       my_print_map(tetris, size);
-      tetra(tetris, shape_list, size);
+      (tetris->status == 1) ? tetra(tetris, shape_list, size) : 0;
       refresh();
       clear();
     }

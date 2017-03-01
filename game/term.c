@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Fri Feb 24 18:13:37 2017 Maxime Jenny
-** Last update Mon Feb 27 18:53:49 2017 Maxime Jenny
+** Last update Tue Feb 28 21:28:03 2017 Maxime Jenny
 */
 
 #include <sys/ioctl.h>
@@ -21,7 +21,7 @@
 int			my_set_term(struct termio *termios)
 {
   ioctl(0, TCGETA, termios);
-  termios->c_lflag &= ~(ICANON | ECHO);
+  termios->c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG);
   termios->c_cc[VTIME] = 0;
   termios->c_cc[VMIN] = 0;
   ioctl(0, TCSETA, termios);
@@ -30,6 +30,6 @@ int			my_set_term(struct termio *termios)
 int			my_reset_term(struct termio *termios)
 {
   ioctl(0, TCGETA, termios);
-  termios->c_lflag |= (ICANON | ECHO);
+  termios->c_lflag |= (ICANON | ECHO | ECHOE | ISIG);
   ioctl(0, TCSETA, termios);
 }

@@ -51,6 +51,21 @@ static void	  my_free_rule(t_game_rules *my_rules, t_tetris tetris)
   free_tab(tetris.map);
 }
 
+int		set_levels(t_tetris *tetris)
+{
+  int		i;
+
+  if ((tetris->levels = malloc(sizeof(int) * 10)) == NULL)
+    return (-1);
+  i = 0;
+  while (i < 10)
+    {
+      tetris->levels[i] = 4500;
+      i++;
+    }
+  return (0);
+}
+
 int		main(int ac, char **av)
 {
   t_game_rules	my_rules;
@@ -67,6 +82,8 @@ int		main(int ac, char **av)
     debug_mode(shape_list, &my_rules);
   tetris.my_rules = &my_rules;
   if (setmap(&tetris) == -1)
+    return (84);
+  if (set_levels(&tetris) == -1)
     return (84);
   tetris.status = 1;
   the_game(&tetris, shape_list);

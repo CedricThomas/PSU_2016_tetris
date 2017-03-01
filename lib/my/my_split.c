@@ -1,9 +1,9 @@
 /*
 ** my_str_to_wordtab.c for CPool_Day08.c in /home/cedric/delivery/CPool_Day08/task04
-** 
+**
 ** Made by Cédric Thomas
 ** Login   <cedric@epitech.net>
-** 
+**
 ** Started on  Wed Oct 12 12:19:23 2016 Cédric Thomas
 ** Last update Fri Nov 18 08:55:41 2016 Cédric Thomas
 */
