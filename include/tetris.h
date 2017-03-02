@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Mon Feb 20 20:44:55 2017
-** Last update Thu Mar  2 17:40:21 2017 
+** Last update Thu Mar  2 18:23:32 2017 
 */
 
 #ifndef TETRIS_H_
@@ -22,7 +22,7 @@
 # define NB_COLORS	9
 # define SCORE_CUBE	10
 # define LINE_TO_UP	10
-# define CYCLE_MAX	1200
+# define CYCLE_MAX	12000
 # define CYCLE_ADD	100
 
 # define ARGS_VALUES	10

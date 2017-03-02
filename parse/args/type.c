@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Tue Feb 21 15:00:13 2017 
-** Last update Wed Mar  1 15:27:34 2017 
+** Last update Thu Mar  2 21:03:14 2017 
 */
 #include <curses.h>
 #include <stdlib.h>
@@ -75,6 +75,6 @@ int		parse_vector(t_parse *parse, char *value)
   if (is_an_int(tabvec[0]) || is_an_int(tabvec[1]))
     return (invalid_parse(parse, "invalid vector value(s)"));
   casted = (t_vector2i *)parse->value;
-  *casted = myvector2i(my_getnbr(tabvec[0]), my_getnbr(tabvec[1]));
+  *casted = myvector2i(my_getnbr(tabvec[1]), my_getnbr(tabvec[0]));
   return (0);
 }

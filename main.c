@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Wed Feb 22 09:46:31 2017
-** Last update Thu Mar  2 17:21:09 2017 
+** Last update Thu Mar  2 20:58:14 2017 
 */
 
 #include <stdlib.h>
@@ -17,28 +17,28 @@ int	help(int jump, char *name)
 {
   if (jump == 1)
     my_putchar('\n');
-  my_putstr("Usage: ");
+  my_putstr("Usage:  ");
   my_putstr(name);
-  my_putstr(" [option]\nOptions:\n");
+  my_putstr(" [options]\nOptions:\n");
   my_putstr("  --help\t\tDisplay this help\n");
-  my_putstr("  -l --level={num}\tStart at level num\n");
-  my_putstr("  -kl --key-left={K}");
-  my_putstr("\tMove tetrimino on LEFT using key K\n");
-  my_putstr("  -kr --key-right={K}");
-  my_putstr("\tMove tetrimino on RIGHT using key K\n");
-  my_putstr("  -kt --key-top={K}");
-  my_putstr("\tTurn tetrimino with key K\n");
+  my_putstr("  -l --level={num}\tStart Tetris at level num (def:  1)\n");
+  my_putstr("  -kl --key-left={K}\tMove the tetrimino LEFT ");
+  my_putstr("using the K key (def:\tleft arrow)\n");
+  my_putstr("  -kr --key-right={K}\tMove the tetrimino RIGHT ");
+  my_putstr("using the K key (def:\tright arrow)\n");
+  my_putstr("  -kt --key-turn={K}\tTURN the tetrimino clockwise ");
+  my_putstr("90d using the K key (def:\ttop arrows)\n");
   my_putstr("  -kd --key-drop={K}");
-  my_putstr("\tSet default DROP on key K\n");
+  my_putstr("\tDROP the tetrimino using the K key (def:  down key)\n");
   my_putstr("  -kq --key-quit={K}");
-  my_putstr("\tQuit program when press key K\n");
+  my_putstr("\tQUIT the game using the K key (def:  'Q' key)\n");
   my_putstr("  -kp --key-pause={K}");
-  my_putstr("\tPause and restart game when press key K\n");
-  my_putstr("  --map-size={row,col}");
-  my_putstr("\tSet game size at row, col\n");
+  my_putstr("\tPAUSE/RESTART the game using the K key (def:  space bar)\n");
+  my_putstr("  --map-size={row,col}\tSet the numbers of ");
+  my_putstr("rows and colums of the map (def:  20,10)\n");
   my_putstr("  -w --without-next");
-  my_putstr("\tHide next tetrimino\n");
-  my_putstr("  -d --debug\t\tDebug mode\n");
+  my_putstr("\tHide next tetrimino (def:  false)\n");
+  my_putstr("  -d --debug\t\tDebug mode (def:  false)\n");
   return (0);
 }
 
@@ -58,9 +58,12 @@ int		main(int ac, char **av)
   t_game_rules	my_rules;
   t_tetrimino	*shape_list;
   t_tetris	tetris;
+  int		i;
 
-  if (ac == 2 && !my_strcmp("--help", av[1]))
-    return (help(0, av[0]));
+  i = 0;
+  while (av[++i])
+    if (!my_strcmp("--help", av[i]))
+      return (help(0, av[0]));
   if (get_gamerules(&my_rules, av, ac) == 84)
     return (84);
   if (get_shape(&shape_list, &my_rules) == 84)
