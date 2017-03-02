@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Mon Feb 20 20:44:55 2017
-** Last update Thu Mar  2 15:37:57 2017 
+** Last update Thu Mar  2 16:03:21 2017 
 */
 
 #ifndef TETRIS_H_
@@ -21,7 +21,7 @@
 # define FOLDER_TETRIS	"tetriminoes"
 # define NB_COLORS	9
 # define SCORE_CUBE	10
-# define LINE_TO_UP	4
+# define LINE_TO_UP	10
 # define CYCLE_MAX	10000
 
 # define ARGS_VALUES	10
