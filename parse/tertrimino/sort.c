@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Fri Feb 24 21:05:11 2017
-** Last update Wed Mar  1 15:28:29 2017
+** Last update Thu Mar  2 15:16:31 2017 
 */
 #include <term.h>
 #include <curses.h>
@@ -49,13 +49,10 @@ int	check_color(t_tetrimino **shape_list)
   int	i;
 
   i = -1;
-  setupterm(NULL, 0, NULL);
-  start_color();
   while ((*shape_list)[++i].name != NULL)
     {
-      if ((*shape_list)[i].color < 0 || (*shape_list)[i].color >= COLORS)
+      if ((*shape_list)[i].color <= 0 || (*shape_list)[i].color > NB_COLORS)
 	(*shape_list)[i].valid = 0;
     }
-  endwin();
   return (0);
 }

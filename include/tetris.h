@@ -5,15 +5,24 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Mon Feb 20 20:44:55 2017
-** Last update Thu Mar  2 09:29:35 2017 
+** Last update Thu Mar  2 15:37:57 2017 
 */
+
 #ifndef TETRIS_H_
 # define TETRIS_H_
+
+# include <sys/types.h>
+# include <dirent.h>
+# include <termio.h>
 
 # define TRUE	1
 # define FALSE	0
 
 # define FOLDER_TETRIS	"tetriminoes"
+# define NB_COLORS	9
+# define SCORE_CUBE	10
+# define LINE_TO_UP	4
+# define CYCLE_MAX	10000
 
 # define ARGS_VALUES	10
 # define ARGS_TYPE	4
@@ -24,10 +33,6 @@
 # define PVECTOR	2
 # define PKEY		3
 # define PBOOLEAN	4
-
-# include <sys/types.h>
-# include <dirent.h>
-# include <termio.h>
 
 typedef struct		s_time
 {
@@ -88,7 +93,9 @@ typedef struct		s_tetris
   char			**map;
   t_game_rules		*my_rules;
   int			status;
-  int			index;
+  int			cycle;
+  int			score;
+  int			line;
   t_time		*t;
   t_tetrimino		*actual_tetri;
   t_tetrimino		*next_tetri;
@@ -127,7 +134,7 @@ int	the_game(t_tetris *tetris, t_tetrimino *shape_list);
 
 int	set_time(t_time *t);
 int	find_time(t_time *t);
-int	interpret_time(t_time *t);
+int	interpret_time(t_time *t, t_vector2i pos);
 
 /*
 **term.c
@@ -140,6 +147,9 @@ int	my_reset_term(struct termio *termio);
 **misc.c
 */
 int	setmap(t_tetris *tetris);
+int	del_full_lines(t_tetris *tetris);
+void	free_tetri(t_tetrimino *tet);
+int	auto_drop(t_tetris *tetris);
 
 /*
 **events.c
@@ -281,6 +291,5 @@ int	is_an_int(char *str);
 char	**fd_to_tab(int fd, int h);
 int	is_only_composed_of(char *str1, char *str2);
 char	**realloc_tab(char **mtab, int size);
-
 
 #endif /* !TETRIS_H_ */

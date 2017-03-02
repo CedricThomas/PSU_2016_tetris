@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Fri Feb 24 18:13:37 2017 Maxime Jenny
-** Last update Tue Feb 28 21:28:03 2017 Maxime Jenny
+** Last update Thu Mar  2 15:43:36 2017 
 */
 
 #include <sys/ioctl.h>
@@ -33,3 +33,4 @@ int			my_reset_term(struct termio *termios)
   termios->c_lflag |= (ICANON | ECHO | ECHOE | ISIG);
   ioctl(0, TCSETA, termios);
 }
+

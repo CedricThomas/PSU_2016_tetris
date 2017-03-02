@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Sat Feb 25 19:37:10 2017
-** Last update Thu Mar  2 09:47:59 2017 
+** Last update Thu Mar  2 14:03:24 2017 
 */
 #include <stdlib.h>
 #include <unistd.h>
@@ -40,9 +40,7 @@ void	my_drop(t_tetris *tetris)
     {
       tetris->actual_tetri->pos.y -= 1;
       add_to_map(tetris, tetris->actual_tetri);
-      free_tab(tetris->actual_tetri->matrix);
-      free(tetris->actual_tetri->name);
-      free(tetris->actual_tetri);
+      free_tetri(tetris->actual_tetri);
       tetris->actual_tetri = NULL;
     }
 }
@@ -58,16 +56,10 @@ void		my_turn(t_tetris *tetris)
   rrotate_matrix(tetri);
   tetri->pos = tetris->actual_tetri->pos;
   if (try_tetri(tetris, tetri))
-    {
-      free_tab(tetri->matrix);
-      free(tetri->name);
-      free(tetri);
-    }
+    free_tetri(tetri);
   else
     {
-      free_tab(tetris->actual_tetri->matrix);
-      free(tetris->actual_tetri->name);
-      free(tetris->actual_tetri);
+      free_tetri(tetris->actual_tetri);
       tetris->actual_tetri = tetri;
     }
 }

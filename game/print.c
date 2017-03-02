@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Wed Mar  1 22:17:30 2017 
-** Last update Thu Mar  2 10:33:01 2017 
+** Last update Thu Mar  2 15:49:05 2017 
 */
 #include <curses.h>
 #include "tetris.h"
@@ -25,17 +25,19 @@ void	print_map(t_tetris *tetris)
 	{
 	  color = (tetris->map[i][j] == '#' ? 7 : tetris->map[i][j]);
 	  charac = '#';
-	  if (tetris->map[i][j] == '#')
+	  if (tetris->map[i][j] != '#' && tetris->map[i][j] != ' ')
 	    charac = '*';
 	  attron(COLOR_PAIR(color));
 	  mvprintw(i + tetris->pos_map.y, j + tetris->pos_map.x,
-		   "%c", tetris->map[i][j]);
+		   "%c", charac);
 	  attroff(COLOR_PAIR(color));
 	}
     }
 }
 
-int             my_put_tetri(t_tetrimino *tetri, t_vector2i rep, t_tetris *tetris)
+int             my_put_tetri(t_tetrimino *tetri,
+			     t_vector2i rep,
+			     t_tetris *tetris)
 {
   int           y;
   int           x;
@@ -70,11 +72,15 @@ void	draw_border(t_vector2i point, t_vector2i size, int color)
       x = 0;
       while (x < size.x + 1)
 	{
-	  attron(COLOR_PAIR(color));
 	  if (x == 0 || x == size.x ||
 	      y == size.y || y == 0)
-	  mvprintw(y + point.y, x + point.x, "#");
-	  attroff(COLOR_PAIR(color));
+	    {
+	      attron(COLOR_PAIR(color));
+	      mvprintw(y + point.y, x + point.x, "#");
+	      attroff(COLOR_PAIR(color));
+	    }
+	  else
+	    mvprintw(y + point.y, x + point.x, " ");
 	  x++;
 	}
       y++;
@@ -86,23 +92,32 @@ int		draw_boards(t_tetris *tetris)
   t_vector2i	vec;
 
   vec = tetris->my_rules->map;
-  vec = myvector2i(vec.x + vec.x / 2, vec.y / 2);
+  vec = myvector2i(vec.x + vec.x / 2, 0);
   vec = addvec(tetris->pos_map, vec);
-  if (!tetris->my_rules->next)
+  if (tetris->my_rules->next == 1)
     {
       draw_border(vec, addvec(tetris->next_tetri->size, myvector2i(7, 4)),
 		  tetris->next_tetri->color);
       mvprintw(vec.y + 1, vec.x + 3, "Next");
       my_put_tetri(tetris->next_tetri, addvec(vec, myvector2i(4, 3)), tetris);
     }
+  vec.y += 10;
+  draw_border(vec, myvector2i(20, 8),
+	      tetris->actual_tetri->color);
+  mvprintw(vec.y + 2, vec.x + 2, "Time : ");
+  find_time(tetris->t);
+  interpret_time(tetris->t, myvector2i(vec.x + 9, vec.y + 2));
+  mvprintw(vec.y + 4, vec.x + 2, "Score : %d", tetris->score);
+  mvprintw(vec.y + 6, vec.x + 2, "Level : %d", tetris->my_rules->level);
 }
 
 int		print_game(t_tetris *tetris, t_tetrimino *shape_list)
 {
-  auto_drop(tetris);
   if (gen_tetri(tetris, shape_list) == -1)
     return (-1);
   print_map(tetris);
   my_put_tetri(tetris->actual_tetri, tetris->pos_map, tetris);
   draw_boards(tetris);
+  del_full_lines(tetris);
+  auto_drop(tetris);
 }

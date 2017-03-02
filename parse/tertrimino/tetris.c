@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Tue Feb 21 20:54:39 2017 
-** Last update Wed Mar  1 15:28:50 2017 
+** Last update Thu Mar  2 14:21:42 2017 
 */
 #include <sys/stat.h>
 #include <unistd.h>
@@ -130,10 +130,6 @@ static int	get_shape_nbr(t_tetrimino **shape_list, char *path, int *size)
   return (0);
 }
 
-/*
-**  check_color(shape_list);
-*/
-
 int	get_shape(t_tetrimino **shape_list)
 {
   char	*path;
@@ -148,6 +144,7 @@ int	get_shape(t_tetrimino **shape_list)
     return (84);
   if (fill_list(shape_list, path))
     return (84);
+  check_color(shape_list);
   free(path);
   sort_tetri(shape_list);
 }

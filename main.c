@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Wed Feb 22 09:46:31 2017
-** Last update Wed Mar  1 20:52:31 2017 
+** Last update Thu Mar  2 10:48:48 2017 
 */
 
 #include <stdlib.h>
@@ -71,6 +71,7 @@ int		main(int ac, char **av)
   if (setmap(&tetris) == -1)
     return (84);
   tetris.status = 1;
+  tetris.score = 0;
   the_game(&tetris, shape_list);
   endwin();
   my_free_rule(&my_rules, tetris);

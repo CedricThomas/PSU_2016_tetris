@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Mon Feb 27 22:05:39 2017 Maxime Jenny
-** Last update Thu Mar  2 10:27:36 2017 
+** Last update Thu Mar  2 14:10:36 2017 
 */
 
 #include <unistd.h>
@@ -86,23 +86,6 @@ int		gen_tetri(t_tetris *tetris, t_tetrimino *shape_list)
       return (-1);
   if (try_tetri(tetris, tetris->actual_tetri))
     tetris->status = 2;
-  return (0);
-}
-
-int		auto_drop(t_tetris *tetris)
-{
-  int           y;
-  int           x;
-
-  if (tetris->actual_tetri == NULL)
-    return (84);
-  if (tetris->index <= 5000 - tetris->my_rules->level * 1000)
-    tetris->index++;
-  else
-    {
-      tetris->index = 0;
-      my_drop(tetris);
-    }
   return (0);
 }
 

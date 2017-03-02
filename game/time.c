@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Wed Feb 22 14:57:00 2017 Maxime Jenny
-** Last update Mon Feb 27 19:01:54 2017 Maxime Jenny
+** Last update Thu Mar  2 14:30:39 2017 
 */
 
 #include <time.h>
@@ -36,13 +36,13 @@ int		find_time(t_time *t)
   return (0);
 }
 
-int			interpret_time(t_time *t)
+int			interpret_time(t_time *t, t_vector2i pos)
 {
   unsigned long long	tim_e;
 
   tim_e = t->actual_time - t->first_time + t->time_before_pause;
-    mvprintw(10, 10, "%.2lu:%.2lu:%.2lu", tim_e / 3600, tim_e % 3600 / 60,
-	      tim_e % 60);
+  mvprintw(pos.y, pos.x, "%.2lu:%.2lu:%.2lu", tim_e / 3600, tim_e % 3600 / 60,
+	   tim_e % 60);
   t->prec_time = tim_e;
   return (0);
 }

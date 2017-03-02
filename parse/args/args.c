@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Mon Feb 20 22:23:37 2017
-** Last update Thu Mar  2 00:22:03 2017 
+** Last update Thu Mar  2 11:01:47 2017 
 */
 #include <term.h>
 #include <curses.h>
@@ -148,5 +148,6 @@ int	get_gamerules(t_game_rules *my_rules, char **args, int ac)
       if (check_new_rules(my_rules))
 	return (84);
     }
+  my_rules->next = (!my_rules->next ? 1 : 0);
   return (0);
 }
