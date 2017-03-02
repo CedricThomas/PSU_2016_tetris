@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Fri Feb 24 21:05:11 2017
-** Last update Thu Mar  2 15:16:31 2017 
+** Last update Thu Mar  2 17:23:31 2017 
 */
 #include <term.h>
 #include <curses.h>
@@ -44,15 +44,23 @@ void	sort_tetri(t_tetrimino **shape_list)
     }
 }
 
-int	check_color(t_tetrimino **shape_list)
+int		check_tetri(t_tetrimino **shape_list, t_game_rules *rules)
 {
-  int	i;
+  int		i;
+  t_vector2i	vec;
 
   i = -1;
   while ((*shape_list)[++i].name != NULL)
     {
-      if ((*shape_list)[i].color <= 0 || (*shape_list)[i].color > NB_COLORS)
-	(*shape_list)[i].valid = 0;
+      if ((*shape_list)[i].valid)
+	{
+	  vec = rules->map;
+	  if ((*shape_list)[i].color <= 0 || (*shape_list)[i].color > NB_COLORS)
+	    (*shape_list)[i].valid = 0;
+	  if ((*shape_list)[i].size.x > vec.x ||
+	      (*shape_list)[i].size.y > vec.y)
+	    (*shape_list)[i].valid = 0;
+	}
     }
   return (0);
 }

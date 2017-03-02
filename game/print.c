@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Wed Mar  1 22:17:30 2017 
-** Last update Thu Mar  2 16:45:53 2017 
+** Last update Thu Mar  2 18:13:21 2017 
 */
 #include <curses.h>
 #include "tetris.h"
@@ -90,18 +90,20 @@ void	draw_border(t_vector2i point, t_vector2i size, int color)
 static int	draw_boards(t_tetris *tetris, t_tetrimino *shape_list)
 {
   t_vector2i	vec;
+  t_vector2i	temp;
 
   vec = tetris->my_rules->map;
-  vec = myvector2i(vec.x + vec.x / 2, 0);
+  vec = myvector2i(vec.x + 3, 0);
   vec = addvec(tetris->pos_map, vec);
+  temp = addvec(get_max(shape_list), myvector2i(7, 4));
   if (tetris->my_rules->next == 1)
     {
-      draw_border(vec, addvec(get_max(shape_list), myvector2i(7, 4)),
+      draw_border(vec, temp,
 		  tetris->next_tetri->color);
       mvprintw(vec.y + 1, vec.x + 3, "Next");
       my_put_tetri(tetris->next_tetri, addvec(vec, myvector2i(4, 3)), tetris);
     }
-  vec.y += 10;
+  vec.y += temp.y + 2;
   draw_border(vec, myvector2i(20, 8),
 	      tetris->actual_tetri->color);
   mvprintw(vec.y + 2, vec.x + 2, "Time : ");

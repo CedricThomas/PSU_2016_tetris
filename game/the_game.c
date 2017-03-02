@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Wed Feb 22 08:50:45 2017 Maxime Jenny
-** Last update Thu Mar  2 16:46:57 2017 
+** Last update Thu Mar  2 17:52:47 2017 
 */
 
 #include <sys/ioctl.h>
@@ -96,9 +96,9 @@ int			the_game(t_tetris *tetris,
       ioctl(0, TIOCGWINSZ, &size);
       tetris->term_size = myvector2i(size.ws_col, size.ws_row);
       my_set_term(&termios);
-      if (try_input(&my_inputs, tetris) == 84)
-	return (84);
       if (my_print(tetris, shape_list) == 84)
+	return (84);
+      if (try_input(&my_inputs, tetris) == 84)
 	return (84);
       refresh();
     }

@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Mon Feb 20 20:44:55 2017
-** Last update Thu Mar  2 17:05:33 2017 
+** Last update Thu Mar  2 17:40:21 2017 
 */
 
 #ifndef TETRIS_H_
@@ -230,7 +230,7 @@ int     parse_vector(t_parse *parse, char *value);
 **tetris.c
 */
 
-int		get_shape(t_tetrimino **form_list);
+int		get_shape(t_tetrimino **form_list, t_game_rules *rules);
 
 /*
 **shape.c
@@ -254,7 +254,7 @@ int		clean_gnl(int fd);
 */
 
 void		sort_tetri(t_tetrimino **shape_list);
-int		check_color(t_tetrimino **shape_list);
+int		check_tetri(t_tetrimino **shape_list, t_game_rules *rules);
 
 /*
 **MATH

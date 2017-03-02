@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Mon Feb 27 22:05:39 2017 Maxime Jenny
-** Last update Thu Mar  2 14:10:36 2017 
+** Last update Thu Mar  2 17:35:31 2017 
 */
 
 #include <unistd.h>
@@ -78,8 +78,10 @@ int		gen_tetri(t_tetris *tetris, t_tetrimino *shape_list)
 	  tetris->actual_tetri = tetris->next_tetri;
 	  tetris->next_tetri = NULL;
 	}
-      tetris->actual_tetri->pos= myvector2i(tetris->my_rules->map.x / 2
-					    - tetris->actual_tetri->size.x / 2, 1);
+      tetris->actual_tetri->pos = myvector2i(tetris->my_rules->map.x / 2
+					     - tetris->actual_tetri->size.x / 2, 1);
+      if (tetris->actual_tetri->pos.x == 0 || tetris->actual_tetri->pos.y == 0)
+	tetris->actual_tetri->pos = myvector2i(1, 1);
     }
   if (tetris->next_tetri == NULL)
     if ((tetris->next_tetri = roll_a_tetri(shape_list, tetris)) == NULL)

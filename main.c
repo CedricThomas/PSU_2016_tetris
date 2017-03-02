@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Wed Feb 22 09:46:31 2017
-** Last update Thu Mar  2 10:48:48 2017 
+** Last update Thu Mar  2 17:21:09 2017 
 */
 
 #include <stdlib.h>
@@ -63,7 +63,7 @@ int		main(int ac, char **av)
     return (help(0, av[0]));
   if (get_gamerules(&my_rules, av, ac) == 84)
     return (84);
-  if (get_shape(&shape_list) == 84)
+  if (get_shape(&shape_list, &my_rules) == 84)
     return (84);
   if (my_rules.debug == 1)
     debug_mode(shape_list, &my_rules);
