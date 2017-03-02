@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Mon Feb 20 20:44:55 2017
-** Last update Thu Mar  2 16:03:21 2017 
+** Last update Thu Mar  2 17:05:33 2017 
 */
 
 #ifndef TETRIS_H_
@@ -22,7 +22,8 @@
 # define NB_COLORS	9
 # define SCORE_CUBE	10
 # define LINE_TO_UP	10
-# define CYCLE_MAX	10000
+# define CYCLE_MAX	1200
+# define CYCLE_ADD	100
 
 # define ARGS_VALUES	10
 # define ARGS_TYPE	4
@@ -273,6 +274,7 @@ t_vector2i	addvec(t_vector2i vec1, t_vector2i vec2);
 int		rrotate_matrix(t_matrix *matrix);
 int		create_matrix(int x, int y, t_matrix *);
 int		show_tetri(t_matrix *matrix);
+t_vector2i	get_max(t_matrix *matrix);
 
 /*
 **MISC

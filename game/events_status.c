@@ -5,13 +5,14 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Sat Feb 25 19:37:10 2017
-** Last update Thu Mar  2 13:54:27 2017 
+** Last update Thu Mar  2 16:47:27 2017 
 */
 #include <ncurses.h>
 #include "tetris.h"
 
 void	my_pause(t_tetris *tetris)
 {
+  clear();
   if (tetris->status == 1)
     {
       tetris->t->time_before_pause  = tetris->t->prec_time;

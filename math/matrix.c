@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Wed Feb 22 15:21:00 2017
-** Last update Sun Feb 26 17:23:35 2017 Maxime Jenny
+** Last update Thu Mar  2 16:41:04 2017 
 */
 #include <stdlib.h>
 #include "my_printf.h"
@@ -80,4 +80,21 @@ int	rrotate_matrix(t_matrix *matrix)
   free_tab(matrix->matrix);
   matrix->matrix = new;
   return (0);
+}
+
+t_vector2i      get_max(t_matrix *matrix)
+{
+  int		i;
+  t_vector2i	max;
+
+  max = myvector2i(-1, -1);
+  i = -1;
+  while (matrix[++i].name != NULL)
+    {
+      if ((max.x == -1 || max.x < matrix[i].size.x) && matrix[i].valid)
+	max.x = matrix[i].size.x;
+      if ((max.y == -1 || max.y < matrix[i].size.y) && matrix[i].valid)
+	max.y = matrix[i].size.y;
+    }
+  return (max);
 }
