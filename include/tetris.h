@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Mon Feb 20 20:44:55 2017
-** Last update Tue Feb 28 22:18:38 2017 
+** Last update Thu Mar  2 09:29:35 2017 
 */
 #ifndef TETRIS_H_
 # define TETRIS_H_
@@ -88,12 +88,11 @@ typedef struct		s_tetris
   char			**map;
   t_game_rules		*my_rules;
   int			status;
-  t_time		*t;
-  int			*levels;
   int			index;
-  t_tetrimino		*actual_tetra;
-  t_tetrimino		*next_tetra;
-  t_vector2i		pos_tetra;
+  t_time		*t;
+  t_tetrimino		*actual_tetri;
+  t_tetrimino		*next_tetri;
+  t_vector2i		pos_map;
   t_vector2i		term_size;
 }			t_tetris;
 
@@ -116,14 +115,11 @@ int	debug_mode(t_tetrimino *form_list, t_game_rules *my_rules);
 ** GAME
 */
 
-int		tetra(t_tetris *tetris, t_tetrimino *shape_list,
-		      struct winsize size);
-
 /*
 **the_game.c
 */
 
-int	the_game(t_tetris *tetris, t_tetrimino *form_list);
+int	the_game(t_tetris *tetris, t_tetrimino *shape_list);
 
 /*
 **time.c
@@ -161,6 +157,20 @@ void    my_drop(t_tetris *tetris);
 int	set_input(t_input *my_inputs, t_tetris *tetris);
 int	reset_input(t_input *my_inputs);
 int	try_input(t_input *my_inputs, t_tetris *tetris);
+
+/*
+**print.c
+*/
+int	print_game(t_tetris *tetris, t_tetrimino *shape_list);
+
+/*
+**tetra.c
+*/
+int		gen_tetri(t_tetris *tetris, t_tetrimino *shape_list);
+int		try_tetri(t_tetris *tetris, t_tetrimino *tetri);
+int             add_to_map(t_tetris *tetris, t_tetrimino *tetri);
+t_tetrimino	*my_dup_tetri(t_tetrimino tet);
+int		auto_drop(t_tetris *tetris);
 
 /*
 **PARSE
@@ -244,6 +254,7 @@ int		check_color(t_tetrimino **shape_list);
 */
 
 t_vector2i	myvector2i(int x, int y);
+t_vector2i	addvec(t_vector2i vec1, t_vector2i vec2);
 
 /*
 **matrix.c

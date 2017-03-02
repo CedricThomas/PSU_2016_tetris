@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Mon Feb 27 22:05:39 2017 Maxime Jenny
-** Last update Wed Mar  1 17:04:02 2017 Maxime Jenny
+** Last update Thu Mar  2 10:25:52 2017 
 */
 
 #include <unistd.h>
@@ -15,7 +15,7 @@
 #include "tetris.h"
 #include "my.h"
 
-t_tetrimino		*my_dup_tetra(t_tetrimino tet)
+t_tetrimino		*my_dup_tetri(t_tetrimino tet)
 {
   t_tetrimino		*dup;
   int			y;
@@ -23,15 +23,15 @@ t_tetrimino		*my_dup_tetra(t_tetrimino tet)
   if ((dup = malloc(sizeof(t_tetrimino))) == NULL)
     return (NULL);
   y = 0;
-  dup->name = tet.name;
+  dup->name = my_strdup(tet.name);
   dup->size.x = tet.size.x;
   dup->size.y = tet.size.y;
-  dup->pos.x = tet.pos.x;
-  dup->pos.y = tet.pos.y;
+  dup->pos.x = 0;
+  dup->pos.y = 0;
   dup->color = tet.color;
-  if ((dup->matrix = malloc(sizeof(char *) * tet.size.y + 1)) == NULL)
+  if ((dup->matrix = malloc(sizeof(char *) * (tet.size.y + 1))) == NULL)
     return (NULL);
-  while (y < tet.size.y)
+  while (tet.matrix[y] != NULL)
     {
       if ((dup->matrix[y] = malloc(my_strlen(tet.matrix[y])))
 	  == NULL)
@@ -39,15 +39,16 @@ t_tetrimino		*my_dup_tetra(t_tetrimino tet)
       dup->matrix[y] = my_strdup(tet.matrix[y]);
       y++;
     }
+  dup->matrix[y] = NULL;
   return (dup);
 }
 
-t_tetrimino	*roll_a_tetra(t_tetrimino *shape_list, t_tetris *tetris,
-			     t_tetrimino *tetra)
+static t_tetrimino	*roll_a_tetri(t_tetrimino *shape_list, t_tetris *tetris)
 {
-  int		i;
-  int		tmp;
-  int		good;
+  t_tetrimino		*tetri;
+  int			i;
+  int			tmp;
+  int			good;
 
   i = 0;
   good = 0;
@@ -55,87 +56,108 @@ t_tetrimino	*roll_a_tetra(t_tetrimino *shape_list, t_tetris *tetris,
   while (!good)
     {
       tmp = rand() % i;
-      if (shape_list[tmp].valid == 0)
-	continue;
-      good = 1;
+      if (shape_list[tmp].valid == 1)
+	good = 1;
     }
-  if ((tetra = my_dup_tetra(shape_list[tmp])) == NULL)
+  if ((tetri = my_dup_tetri(shape_list[tmp])) == NULL)
     return (NULL);
-  return (tetra);
+  return (tetri);
 }
 
-int		my_put_tetra(t_tetrimino *tetra, int x, int y,
-			     t_tetris *tetris)
+int		gen_tetri(t_tetris *tetris, t_tetrimino *shape_list)
 {
-  int		y1;
-  int		x1;
-
-  y1 = 0;
-  while (y1 < tetra->size.y)
+  if (tetris->actual_tetri == NULL)
     {
-      x1 = 0;
-      while (tetra->matrix[y1][x1] != '\0')
+      if (tetris->next_tetri == NULL)
 	{
-	  if (tetra->matrix[y1][x1] != ' ')
-	    {
-	      attron(COLOR_PAIR(tetra->color));
-	      mvprintw(y + y1, x + x1, "%c", tetra->matrix[y1][x1]);
-	      attroff(COLOR_PAIR(tetra->color));
-	    }
-	  x1++;
-	}
-      y1++;
-    }
-}
-
-int		move_tetra(t_tetris *tetris)
-{
-  int		y;
-  int		x;
-
-  if (tetris->index <= tetris->levels[tetris->my_rules->level])
-    tetris->index++;
-  else
-    {
-      x = tetris->pos_tetra.x;
-      y = tetris->pos_tetra.y + tetris->actual_tetra->size.y;
-      tetris->index = 0;
-      if (tetris->map[y][x] == ' ')
-	{
-	  tetris->pos_tetra.y += 1;
-	}
-    }
-}
-
-int		tetra(t_tetris *tetris, t_tetrimino *shape_list,
-		      struct winsize size)
-{
-  if (tetris->actual_tetra == NULL)
-    {
-      tetris->pos_tetra.x = tetris->my_rules->map.x / 2;
-      tetris->pos_tetra.y = 1;
-      if (tetris->next_tetra != NULL)
-	{
-	  tetris->actual_tetra = tetris->next_tetra;
-	  tetris->next_tetra = NULL;
+	  if ((tetris->actual_tetri = roll_a_tetri(shape_list, tetris)) == NULL)
+	    return (-1);
 	}
       else
 	{
-	  if ((tetris->actual_tetra =
-	       roll_a_tetra(shape_list, tetris, tetris->actual_tetra)) == NULL)
-	    return (-1);
+	  tetris->actual_tetri = tetris->next_tetri;
+	  tetris->next_tetri = NULL;
+	}
+      tetris->actual_tetri->pos= myvector2i(tetris->my_rules->map.x / 2
+					    - tetris->actual_tetri->size.x / 2, 1);
+    }
+  if (tetris->next_tetri == NULL)
+    if ((tetris->next_tetri = roll_a_tetri(shape_list, tetris)) == NULL)
+      return (-1);
+  if (try_tetri(tetris, tetris->actual_tetri))
+    tetris->status = 2;
+  return (0);
+}
+
+int		auto_drop(t_tetris *tetris)
+{
+  int           y;
+  int           x;
+
+  if (tetris->actual_tetri == NULL)
+    return (84);
+  if (tetris->index <= 2500 - tetris->my_rules->level * 100)
+    tetris->index++;
+  else
+    {
+      tetris->index = 0;
+      my_drop(tetris);
+    }
+  return (0);
+}
+
+int		try_tetri(t_tetris *tetris, t_tetrimino *tetri)
+{
+  t_vector2i	map_size;
+  int		i;
+  int		j;
+  int		im;
+  int		jm;
+
+  i = -1;
+  if (tetri == NULL)
+    return (84);
+  map_size = tetris->my_rules->map;
+  while (tetri->matrix[++i])
+    {
+      j = -1;
+      while (tetri->matrix[i][++j])
+	{
+	  jm = j + tetri->pos.x;
+	  im = i + tetri->pos.y;
+	  if (!(im >= 0 && im < map_size.y + 1 && jm >= 0 && jm < map_size.x + 1)
+	      || tetris->map[im][jm] != ' ' && tetri->matrix[i][j] != ' ')
+	    return (84);
 	}
     }
-  if (tetris->next_tetra == NULL)
-    if ((tetris->next_tetra =
-	 roll_a_tetra(shape_list, tetris, tetris->next_tetra)) == NULL)
-	return (-1);
-  move_tetra(tetris);
-  my_put_tetra(tetris->actual_tetra, tetris->term_size.x / 2 -
-	       tetris->my_rules->map.x + tetris->pos_tetra.x,
-	       tetris->term_size.y / 2 - tetris->my_rules->map.y / 2 +
-	       tetris->pos_tetra.y, tetris);
-  my_put_tetra(tetris->next_tetra, tetris->term_size.x / 2 + tetris->my_rules->map.x,
-        (tetris->term_size.y) / 2 - 13, tetris);
   return (0);
+}
+
+int	add_to_map(t_tetris *tetris, t_tetrimino *tetri)
+{
+  t_vector2i	map_size;
+  int		i;
+  int		j;
+  int		im;
+  int		jm;
+
+  i = -1;
+  if (tetri == NULL)
+      return (84);
+  map_size = tetris->my_rules->map;
+  while (tetri->matrix[++i])
+    {
+      j = -1;
+      while (tetri->matrix[i][++j])
+	{
+	  jm = j + tetri->pos.x;
+	  im = i + tetri->pos.y;
+	  if (tetris->map[im][jm] == ' ')
+	    {
+	      tetris->map[im][jm] = ' ';
+	      if (tetri->matrix[i][j] != ' ')
+		tetris->map[im][jm] = tetri->color;
+	    }
+	}
+    }
 }

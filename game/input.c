@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Sun Feb 26 13:32:53 2017
-** Last update Tue Feb 28 21:06:26 2017 
+** Last update Wed Mar  1 22:21:55 2017 
 */
 
 #include <unistd.h>
@@ -47,7 +47,8 @@ int	try_input(t_input *my_inputs, t_tetris *tetris)
   if ((match = read(0, buffer, 1)) != 0)
     {
       buffer[match] = 0;
-      my_inputs->input = my_strcatdup(my_inputs->input, buffer, 1);
+      if ((my_inputs->input = my_strcatdup(my_inputs->input, buffer, 1)) == NULL)
+	return (84);
     }
   match = 0;
   while (++i < INPUT_NB && my_inputs->input != NULL)

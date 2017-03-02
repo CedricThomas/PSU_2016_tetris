@@ -5,41 +5,69 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Sat Feb 25 19:37:10 2017
-** Last update Tue Feb 28 21:10:25 2017 Maxime Jenny
+** Last update Thu Mar  2 09:47:59 2017 
 */
+#include <stdlib.h>
+#include <unistd.h>
 #include <ncurses.h>
 #include "tetris.h"
+#include "my.h"
 
 void	my_left(t_tetris *tetris)
 {
-  int	x;
-  int	y;
-
-  x = tetris->pos_tetra.x;
-  y = tetris->pos_tetra.y;
-  if (tetris->map[y][x - 1] == ' ')
-    tetris->pos_tetra.x -= 1;
+  if (tetris->actual_tetri == NULL)
+    return ;
+  tetris->actual_tetri->pos.x -= 1;
+  if (try_tetri(tetris, tetris->actual_tetri))
+    tetris->actual_tetri->pos.x += 1;
 }
 
 void	my_right(t_tetris *tetris)
 {
-  int	x;
-  int	y;
-
-  x = tetris->pos_tetra.x + tetris->actual_tetra->size.x;
-  y = tetris->pos_tetra.y;
-  if (tetris->map[y][x] == ' ')
-    tetris->pos_tetra.x += 1;
+  if (tetris->actual_tetri == NULL)
+      return ;
+  tetris->actual_tetri->pos.x += 1;
+  if (try_tetri(tetris, tetris->actual_tetri))
+    tetris->actual_tetri->pos.x -= 1;
 }
 
 void	my_drop(t_tetris *tetris)
 {
-  mvprintw(0, 0, "drop");
+  if (tetris->actual_tetri == NULL)
+    return ;
+  tetris->actual_tetri->pos.y += 1;
+  if (try_tetri(tetris, tetris->actual_tetri))
+    {
+      tetris->actual_tetri->pos.y -= 1;
+      add_to_map(tetris, tetris->actual_tetri);
+      free_tab(tetris->actual_tetri->matrix);
+      free(tetris->actual_tetri->name);
+      free(tetris->actual_tetri);
+      tetris->actual_tetri = NULL;
+    }
 }
 
-void	my_turn(t_tetris *tetris)
+void		my_turn(t_tetris *tetris)
 {
-  if (tetris->pos_tetra.x - (tetris->term_size.x - tetris->my_rules->map.x) +
-      tetris->actual_tetra->size.y < tetris->my_rules->map.x + 1)
-  rrotate_matrix(tetris->actual_tetra);
+  t_tetrimino	*tetri;
+
+  if (tetris->actual_tetri == NULL)
+      return ;
+  if ((tetri = my_dup_tetri(*(tetris->actual_tetri))) == NULL)
+    exit(84);
+  rrotate_matrix(tetri);
+  tetri->pos = tetris->actual_tetri->pos;
+  if (try_tetri(tetris, tetri))
+    {
+      free_tab(tetri->matrix);
+      free(tetri->name);
+      free(tetri);
+    }
+  else
+    {
+      free_tab(tetris->actual_tetri->matrix);
+      free(tetris->actual_tetri->name);
+      free(tetris->actual_tetri);
+      tetris->actual_tetri = tetri;
+    }
 }

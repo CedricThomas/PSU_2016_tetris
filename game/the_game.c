@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Wed Feb 22 08:50:45 2017 Maxime Jenny
-** Last update Wed Mar  1 17:04:24 2017 Maxime Jenny
+** Last update Thu Mar  2 09:28:03 2017 
 */
 
 #include <sys/ioctl.h>
@@ -21,31 +21,28 @@
 #include "tetris.h"
 #include "my.h"
 
-void		my_print_map(t_tetris *tetris, struct winsize size)
+int		my_print(t_tetris *tetris, t_tetrimino *shape_list)
 {
-  int		y;
-
-  if (tetris->status == 1)
+  tetris->pos_map.x = tetris->term_size.x / 2 -
+    (tetris->my_rules->map.x / 2 - 1);
+  tetris->pos_map.y = tetris->term_size.y / 2 -
+    (tetris->my_rules->map.y / 2 - 1);
+  if (tetris->status == 0)
     {
-      if (size.ws_col < tetris->my_rules->map.x + 2 ||
-	  size.ws_row < tetris->my_rules->map.y + 2)
-	{
-          my_pause(tetris);
-	}
-      else
-	{
-	  find_time(tetris->t);
-	  interpret_time(tetris->t);
-	  tetris->status = 1;
-	  y = -1;
-	  while (++y < tetris->my_rules->map.y + 2)
-	    mvprintw((size.ws_row / 2) - (tetris->my_rules->map.y / 2) + y,
-		     (size.ws_col / 2) - (tetris->my_rules->map.y / 2), "%s",
-		     tetris->map[y]);
-	}
+      mvprintw(tetris->term_size.y / 2, tetris->term_size.x / 2 - 5, "%s", "PAUSE");
+      return (0); 
     }
-  else if (tetris->status == 0)
-    mvprintw((size.ws_row / 2), (size.ws_col / 2) - 5, "%s", "PAUSE");
+  if (tetris->term_size.x < tetris->my_rules->map.x + 2 ||
+      tetris->term_size.y < tetris->my_rules->map.y + 2)
+    my_pause(tetris);
+  else
+    {
+      find_time(tetris->t);
+      interpret_time(tetris->t);
+      if ((print_game(tetris, shape_list)) == 84)
+	return (84);
+    }
+  return (0);
 }
 
 int			reset(t_input *my_inputs, t_tetris *tetris,
@@ -75,8 +72,9 @@ int			set_all(t_tetris *tetris)
   init_pair(7, COLOR_WHITE, COLOR_WHITE);
   init_pair(8, COLOR_WHITE, COLOR_BLACK);
   init_pair(9, 40, 40);
-  tetris->actual_tetra = NULL;
-  tetris->next_tetra = NULL;
+  tetris->actual_tetri = NULL;
+  tetris->next_tetri = NULL;
+  tetris->index = 0;
   if ((tetris->t = malloc(sizeof(t_time))) == NULL)
     return (-1);
   tetris->t->time_before_pause = 0;
@@ -99,12 +97,12 @@ int			the_game(t_tetris *tetris,
   while (tetris->status != 2)
     {
       ioctl(0, TIOCGWINSZ, &size);
-      tetris->term_size.x = size.ws_col;
-      tetris->term_size.y = size.ws_row;
+      tetris->term_size = myvector2i(size.ws_col, size.ws_row);
       my_set_term(&termios);
-      try_input(&my_inputs, tetris);
-      my_print_map(tetris, size);
-      (tetris->status == 1) ? tetra(tetris, shape_list, size) : 0;
+      if (try_input(&my_inputs, tetris) == 84)
+	return (84);
+      if (my_print(tetris, shape_list) == 84)
+	return (84);
       refresh();
       clear();
     }
