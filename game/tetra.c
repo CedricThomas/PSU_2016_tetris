@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Mon Feb 27 22:05:39 2017 Maxime Jenny
-** Last update Thu Mar  2 10:25:52 2017 
+** Last update Thu Mar  2 10:27:36 2017 
 */
 
 #include <unistd.h>
@@ -96,7 +96,7 @@ int		auto_drop(t_tetris *tetris)
 
   if (tetris->actual_tetri == NULL)
     return (84);
-  if (tetris->index <= 2500 - tetris->my_rules->level * 100)
+  if (tetris->index <= 5000 - tetris->my_rules->level * 1000)
     tetris->index++;
   else
     {
