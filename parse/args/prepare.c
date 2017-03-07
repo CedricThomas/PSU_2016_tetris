@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Tue Feb 21 11:29:08 2017 
-** Last update Wed Feb 22 09:18:44 2017 
+** Last update Fri Mar  3 18:20:13 2017 
 */
 #include <stdlib.h>
 #include "tetris.h"
@@ -15,7 +15,7 @@ int	gamerules_fct(int (*fct[ARGS_TYPE])(t_parse *parse, char *value))
 {
   fct[PVALUE - 1] = &parse_value;
   fct[PVECTOR - 1] = &parse_vector;
-  fct[PKEY- 1] = &parse_key;
+  fct[PKEY - 1] = &parse_key;
   fct[PBOOLEAN - 1] = &parse_boolean;
 }
 
