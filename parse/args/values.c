@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Wed Mar  8 10:05:36 2017 
-** Last update Wed Mar  8 10:45:00 2017 
+** Last update Wed Mar  8 15:56:42 2017 
 */
 #include <term.h>
 #include <curses.h>
@@ -68,6 +68,5 @@ int	set_default_gamerules(t_game_rules *my_rules)
   my_rules->map = myvector2i(-1, -1);
   my_rules->next = FALSE;
   my_rules->debug = FALSE;
-  my_rules->debug = TRUE;
   return (0);
 }
