@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Wed Feb 22 09:16:27 2017 Maxime Jenny
-** Last update Tue Mar  7 18:24:52 2017 
+** Last update Wed Mar  8 20:20:13 2017 
 */
 #include <stdlib.h>
 #include <ncurses.h>
@@ -31,10 +31,7 @@ static void	print_key(char *key, char *value)
   my_printf("Key %s :  ", key);
   while (value[++i])
     {
-      if (value[i] == '\e')
-	my_putstr("^E");
-      else
-	my_putchar(value[i]);
+      my_putchar(value[i]);
     }
   my_putchar('\n');
 }
