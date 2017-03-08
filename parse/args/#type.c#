@@ -84,7 +84,7 @@ int		parse_vector(t_parse *parse, char *value)
       return (invalid_parse(parse, "the value as already been set"));
     }
   *casted = myvector2i(my_getnbr(tabvec[1]), my_getnbr(tabvec[0]));
-  free_tab(tabvec);
+  free_tab(tabvec;)
   if (casted->x <= 0 || casted->y <= 0)
     return (invalid_parse(parse, "the values must be positives"));
   return (0);

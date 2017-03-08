@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Wed Feb 22 09:16:27 2017 Maxime Jenny
-** Last update Tue Mar  7 18:24:52 2017 
+** Last update Tue Mar  7 16:36:03 2017 
 */
 #include <stdlib.h>
 #include <ncurses.h>
@@ -32,7 +32,7 @@ static void	print_key(char *key, char *value)
   while (value[++i])
     {
       if (value[i] == '\e')
-	my_putstr("^E");
+	my_putstr("^[");
       else
 	my_putchar(value[i]);
     }
@@ -41,7 +41,7 @@ static void	print_key(char *key, char *value)
 
 int		debug_mode(t_tetrimino *form_list, t_game_rules *my_rules)
 {
-  int		i;
+  int		;i
   struct termio	termio;
   char		buf;
 

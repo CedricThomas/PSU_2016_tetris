@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Mon Feb 20 22:23:37 2017
-** Last update Fri Mar  3 18:22:29 2017 
+** Last update Wed Mar  8 10:51:54 2017 
 */
 #include <term.h>
 #include <curses.h>
@@ -82,29 +82,6 @@ static int	cmp_args(char **args, int ac,
   return (exitval ? 1 : 0);
 }
 
-static int	get_default_gamerules(t_game_rules *my_rules)
-{
-  setupterm(NULL, 0, NULL);
-  my_rules->level = 1;
-  if ((my_rules->mkey_left = my_strdup(tigetstr("kcub1"))) == NULL)
-    return (84);
-  if ((my_rules->mkey_right = my_strdup(tigetstr("kcuf1"))) == NULL)
-    return (84);
-  if ((my_rules->mkey_turn = my_strdup(tigetstr("kcuu1"))) == NULL)
-    return (84);
-  if ((my_rules->mkey_drop = my_strdup(tigetstr("kcud1"))) == NULL)
-    return (84);
-  if ((my_rules->mkey_quit = my_strdup("q")) == NULL)
-    return (84);
-  if ((my_rules->mkey_pause = my_strdup(" ")) == NULL)
-    return (84);
-  my_rules->map = myvector2i(10, 20);
-  my_rules->next = FALSE;
-  my_rules->debug = FALSE;
-  endwin();
-  return (0);
-}
-
 static int	check_new_rules(t_game_rules *my_rules)
 {
   int		j;
@@ -115,8 +92,6 @@ static int	check_new_rules(t_game_rules *my_rules)
       my_puterror("Error : level must be between 1 and 10\n");
       return (84);
     }
-  if (my_rules->map.x <= 0 || my_rules->map.y <= 0)
-    return (84);
   i = 0;
   while (++i < 7)
     {
@@ -137,18 +112,19 @@ int	get_gamerules(t_game_rules *my_rules, char **args, int ac)
 {
   int	(*fct[ARGS_TYPE])(t_parse *parse, char *value);
 
-  if (get_default_gamerules(my_rules) == 84)
+  if (set_default_gamerules(my_rules) == 84)
     return (84);
+  link_pointers(my_rules);
   if (ac > 1)
     {
       gamerules_fct(fct);
-      link_pointers(my_rules);
       if (cmp_args(args, ac, fct))
 	return (84);
-      if (check_new_rules(my_rules))
-	return (84);
     }
+  if (fill_default_gamerules(my_rules) == 84)
+    return (84);
+  if (check_new_rules(my_rules))
+    return (84);
   my_rules->next = (!my_rules->next ? 1 : 0);
   return (0);
-
 }

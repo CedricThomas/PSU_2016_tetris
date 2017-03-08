@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Mon Feb 20 20:44:55 2017
-** Last update Thu Mar  2 18:23:32 2017 
+** Last update Wed Mar  8 10:17:58 2017 
 */
 
 #ifndef TETRIS_H_
@@ -192,6 +192,12 @@ int     match(char *s1, char *s2);
 /*
 **PARSE/ARGS
 */
+
+/*
+**values.c
+*/
+int	set_default_gamerules(t_game_rules *my_rules);
+int	fill_default_gamerules(t_game_rules *my_rules);
 
 /*
 **args.c

@@ -5,7 +5,7 @@
 ## Login   <cedric@epitech.net>
 ##
 ## Started on  Sat Oct 22 10:37:32 2016 Cédric Thomas
-## Last update Wed Mar  1 23:04:16 2017 
+## Last update Wed Mar  8 10:13:45 2017 
 ##
 
 SRC	=	main.c				\
@@ -15,6 +15,7 @@ SRC	=	main.c				\
 		misc/str.c			\
 		parse/match.c			\
 		parse/args/args.c		\
+		parse/args/values.c		\
 		parse/args/prepare.c		\
 		parse/args/type.c		\
 		parse/tertrimino/tetris.c	\

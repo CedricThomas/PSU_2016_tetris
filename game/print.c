@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Wed Mar  1 22:17:30 2017 
-** Last update Thu Mar  2 18:13:21 2017 
+** Last update Tue Mar  7 19:41:31 2017 
 */
 #include <curses.h>
 #include "tetris.h"
@@ -24,8 +24,8 @@ void	print_map(t_tetris *tetris)
       while (tetris->map[i][++j])
 	{
 	  color = (tetris->map[i][j] == '#' ? 7 : tetris->map[i][j]);
-	  charac = '#';
-	  if (tetris->map[i][j] != '#' && tetris->map[i][j] != ' ')
+	  charac = (tetris->map[i][j] == '#' ? '#' : ' ');
+	  if (tetris->map[i][j] != charac)
 	    charac = '*';
 	  attron(COLOR_PAIR(color));
 	  mvprintw(i + tetris->pos_map.y, j + tetris->pos_map.x,
