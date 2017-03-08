@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Tue Feb 21 15:00:13 2017 
-** Last update Wed Mar  8 10:49:24 2017 
+** Last update Wed Mar  8 10:59:57 2017 
 */
 #include <curses.h>
 #include <stdlib.h>

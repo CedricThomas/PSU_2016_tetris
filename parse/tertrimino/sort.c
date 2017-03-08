@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Fri Feb 24 21:05:11 2017
-** Last update Tue Mar  7 18:54:20 2017 
+** Last update Wed Mar  8 11:35:33 2017 
 */
 #include <term.h>
 #include <curses.h>
@@ -44,6 +44,21 @@ void	sort_tetri(t_tetrimino **shape_list)
     }
 }
 
+static void	check_content(t_tetrimino **shape_list, int idx)
+{
+  int		i;
+  int		j;
+
+  i = -1;
+  while ((*shape_list)[idx].matrix[++i] && (*shape_list)[idx].valid)
+    {
+      j = -1;
+      while ((*shape_list)[idx].matrix[i][++j] && (*shape_list)[idx].valid)
+	if (!is_in((*shape_list)[idx].matrix[i][j], " *"))
+	    (*shape_list)[idx].valid = 0;
+    }
+}
+
 int		check_tetri(t_tetrimino **shape_list, t_game_rules *rules)
 {
   int		i;
@@ -55,11 +70,14 @@ int		check_tetri(t_tetrimino **shape_list, t_game_rules *rules)
       if ((*shape_list)[i].valid)
 	{
 	  vec = rules->map;
-	  if ((*shape_list)[i].color <= 0 || (*shape_list)[i].color > NB_COLORS)
+	  if ((*shape_list)[i].color <= 0)
+	    (*shape_list)[i].valid = 0;
+	  else if ((*shape_list)[i].color > NB_COLORS)
 	    (*shape_list)[i].color %= NB_COLORS;
 	  if ((*shape_list)[i].size.x > vec.x ||
 	      (*shape_list)[i].size.y > vec.y)
 	    (*shape_list)[i].valid = 0;
+	  check_content(shape_list, i);
 	}
     }
   return (0);
