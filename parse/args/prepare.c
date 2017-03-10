@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Tue Feb 21 11:29:08 2017 
-** Last update Fri Mar  3 18:20:13 2017 
+** Last update Fri Mar 10 12:32:18 2017 Cédric Thomas
 */
 #include <stdlib.h>
 #include "tetris.h"
@@ -29,7 +29,7 @@ int	prepare_long(t_parse *parse,
   key = parse->long_name;
   if (parse->type == PBOOLEAN && !my_strcmp(args[*i], parse->long_name))
     args_value = NULL;
-  else if (args[*i][my_strlen(key)] == '=')
+  else if (args[*i][my_strlen(key)] == '=' && parse->type != PBOOLEAN)
     args_value = args[*i] + my_strlen(key) + 1;
   else
     return (1);

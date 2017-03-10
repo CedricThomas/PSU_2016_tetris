@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Wed Mar  8 10:05:36 2017 
-** Last update Wed Mar  8 15:56:42 2017 
+** Last update Fri Mar 10 10:12:54 2017 Cédric Thomas
 */
 #include <term.h>
 #include <curses.h>
@@ -17,19 +17,19 @@ static int	fill_keys(t_game_rules *my_rules, int test)
 {
   if (my_rules->mkey_left == NULL)
     if ((my_rules->mkey_left =
-	 my_strdup(tigetstr(test ? "cub1" : "kcub1"))) == NULL)
+	 my_strdup(tigetstr(test ? "kcub1" : "kcub1"))) == NULL)
       return (84);
   if (my_rules->mkey_right == NULL)
     if ((my_rules->mkey_right =
-	 my_strdup(tigetstr(test ? "cuf1" : "kcuf1"))) == NULL)
+	 my_strdup(tigetstr(test ? "kcuf1" : "kcuf1"))) == NULL)
       return (84);
   if (my_rules->mkey_turn == NULL)
     if ((my_rules->mkey_turn =
-	 my_strdup(tigetstr(test ? "cuu1" : "kcuu1"))) == NULL)
+	 my_strdup(tigetstr(test ? "kcuu1" : "kcuu1"))) == NULL)
       return (84);
   if (my_rules->mkey_drop == NULL)
     if ((my_rules->mkey_drop =
-	 my_strdup(tigetstr(test ? "cud1" : "kcud1"))) == NULL)
+	 my_strdup(tigetstr(test ? "kcud1" : "kcud1"))) == NULL)
       return (84);
   if (my_rules->mkey_quit == NULL)
     if ((my_rules->mkey_quit = my_strdup("q")) == NULL)
@@ -37,6 +37,7 @@ static int	fill_keys(t_game_rules *my_rules, int test)
   if (my_rules->mkey_pause == NULL)
     if ((my_rules->mkey_pause = my_strdup(" ")) == NULL)
       return (84);
+  printf("%d\n", test);
   return (0);
 }
 

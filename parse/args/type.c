@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Tue Feb 21 15:00:13 2017 
-** Last update Wed Mar  8 10:59:57 2017 
+** Last update Fri Mar 10 12:26:06 2017 Cédric Thomas
 */
 #include <curses.h>
 #include <stdlib.h>
@@ -46,6 +46,8 @@ int	parse_value(t_parse *parse, char *value)
   if (is_an_int(value))
     return (invalid_parse(parse, "invalid value"));
   *casted = my_getnbr(value);
+  if (*casted <= 0 || *casted > 10)
+    return (invalid_parse(parse, "the value must be between 0 and 10"));
   return (0);
 }
 

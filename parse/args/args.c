@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Mon Feb 20 22:23:37 2017
-** Last update Wed Mar  8 10:51:54 2017 
+** Last update Fri Mar 10 12:25:32 2017 Cédric Thomas
 */
 #include <term.h>
 #include <curses.h>
@@ -87,11 +87,6 @@ static int	check_new_rules(t_game_rules *my_rules)
   int		j;
   int		i;
 
-  if (my_rules->level <= 0 || my_rules->level > 10)
-    {
-      my_puterror("Error : level must be between 1 and 10\n");
-      return (84);
-    }
   i = 0;
   while (++i < 7)
     {
