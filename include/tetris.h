@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Mon Feb 20 20:44:55 2017
-** Last update Wed Mar  8 10:17:58 2017 
+** Last update Fri Mar 10 09:53:12 2017 Cédric Thomas
 */
 
 #ifndef TETRIS_H_
@@ -18,7 +18,7 @@
 # define TRUE	1
 # define FALSE	0
 
-# define FOLDER_TETRIS	"tetriminoes"
+# define FOLDER_TETRIS	"tetriminos"
 # define NB_COLORS	9
 # define SCORE_CUBE	10
 # define LINE_TO_UP	10
