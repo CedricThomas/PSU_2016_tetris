@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Wed Mar  8 10:05:36 2017 
-** Last update Fri Mar 10 10:12:54 2017 Cédric Thomas
+** Last update Fri Mar 10 12:37:08 2017 Cédric Thomas
 */
 #include <term.h>
 #include <curses.h>
@@ -37,7 +37,6 @@ static int	fill_keys(t_game_rules *my_rules, int test)
   if (my_rules->mkey_pause == NULL)
     if ((my_rules->mkey_pause = my_strdup(" ")) == NULL)
       return (84);
-  printf("%d\n", test);
   return (0);
 }
 
