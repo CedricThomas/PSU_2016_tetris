@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Wed Mar  1 22:17:30 2017 
-** Last update Tue Mar  7 19:41:31 2017 
+** Last update Sun Mar 12 17:16:26 2017 Cédric Thomas
 */
 #include <curses.h>
 #include "tetris.h"
@@ -43,6 +43,7 @@ int             my_put_tetri(t_tetrimino *tetri,
   int           x;
 
   y = 0;
+  (void)tetris;
   while (tetri->matrix[y])
     {
       x = 0;
@@ -59,6 +60,7 @@ int             my_put_tetri(t_tetrimino *tetri,
 	}
       y++;
     }
+  return (0);
 }
 
 void	draw_border(t_vector2i point, t_vector2i size, int color)
@@ -87,7 +89,7 @@ void	draw_border(t_vector2i point, t_vector2i size, int color)
     }
 }
 
-static int	draw_boards(t_tetris *tetris, t_tetrimino *shape_list)
+static void	draw_boards(t_tetris *tetris, t_tetrimino *shape_list)
 {
   t_vector2i	vec;
   t_vector2i	temp;
@@ -122,4 +124,5 @@ int		print_game(t_tetris *tetris, t_tetrimino *shape_list)
   draw_boards(tetris, shape_list);
   del_full_lines(tetris);
   auto_drop(tetris);
+  return (0);
 }

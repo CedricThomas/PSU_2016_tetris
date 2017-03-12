@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Mon Feb 20 22:23:37 2017
-** Last update Fri Mar 10 12:25:32 2017 Cédric Thomas
+** Last update Sun Mar 12 14:48:33 2017 
 */
 #include <term.h>
 #include <curses.h>
@@ -82,7 +82,7 @@ static int	cmp_args(char **args, int ac,
   return (exitval ? 1 : 0);
 }
 
-static int	check_new_rules(t_game_rules *my_rules)
+static int	check_new_rules()
 {
   int		j;
   int		i;
@@ -118,7 +118,7 @@ int	get_gamerules(t_game_rules *my_rules, char **args, int ac)
     }
   if (fill_default_gamerules(my_rules) == 84)
     return (84);
-  if (check_new_rules(my_rules))
+  if (check_new_rules())
     return (84);
   my_rules->next = (!my_rules->next ? 1 : 0);
   return (0);

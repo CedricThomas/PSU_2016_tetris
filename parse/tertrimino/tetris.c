@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Tue Feb 21 20:54:39 2017 
-** Last update Thu Mar  2 17:24:10 2017 
+** Last update Sun Mar 12 14:52:06 2017 
 */
 #include <sys/stat.h>
 #include <unistd.h>
@@ -48,7 +48,6 @@ static int	check_header(char **header, char *line)
 static int	get_shape_from_file(int index, char *path,
 				    char *name, t_tetrimino **shape_list)
 {
-  int		i;
   int		fd;
   char		**header;
   char		*s;
@@ -147,4 +146,5 @@ int	get_shape(t_tetrimino **shape_list, t_game_rules *rules)
   check_tetri(shape_list, rules);
   free(path);
   sort_tetri(shape_list);
+  return (0);
 }

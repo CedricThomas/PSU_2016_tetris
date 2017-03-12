@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Sat Feb 25 19:07:15 2017
-** Last update Thu Mar  2 17:00:58 2017 
+** Last update Sun Mar 12 14:55:34 2017 
 */
 #include <stdlib.h>
 #include "tetris.h"
@@ -96,9 +96,6 @@ void	free_tetri(t_tetrimino *tet)
 
 int		auto_drop(t_tetris *tetris)
 {
-  int           y;
-  int           x;
-
   if (tetris->actual_tetri == NULL)
     return (84);
   if (tetris->cycle <= CYCLE_MAX - tetris->my_rules->level * CYCLE_ADD)

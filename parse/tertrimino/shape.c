@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Wed Feb 22 13:41:55 2017 
-** Last update Wed Mar  8 11:16:51 2017 
+** Last update Sun Mar 12 15:04:53 2017 
 */
 #include <stdlib.h>
 #include "my.h"
@@ -15,7 +15,6 @@
 static t_vector2i	circle_height(char **tab)
 {
   int			i;
-  int			j;
   t_vector2i		max_len;
 
   max_len = myvector2i(-1, -1);
@@ -24,8 +23,8 @@ static t_vector2i	circle_height(char **tab)
     {
       if (max_len.x < 0 && is_in('*', tab[i]))
 	max_len.x = i;
-      if (max_len.y < 0 && is_in('*', tab[i]) ||
-	  i > max_len.y && is_in('*', tab[i]))
+      if ((max_len.y < 0 && is_in('*', tab[i])) ||
+	  (i > max_len.y && is_in('*', tab[i])))
 	max_len.y = i;
     }
   return (max_len);
@@ -34,7 +33,6 @@ static t_vector2i	circle_height(char **tab)
 static t_vector2i	circle_width(char **tab)
 {
   int			i;
-  int			j;
   t_vector2i		vec;
   t_vector2i		max_len;
 

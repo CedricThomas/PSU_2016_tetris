@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Tue Feb 21 15:00:13 2017 
-** Last update Fri Mar 10 12:26:06 2017 Cédric Thomas
+** Last update Sun Mar 12 14:51:17 2017 
 */
 #include <curses.h>
 #include <stdlib.h>
@@ -31,6 +31,10 @@ int	parse_boolean(t_parse *parse, char *value)
 {
   int	*casted;
 
+  if (value == NULL)
+    value = NULL;
+  else
+    value = NULL;
   casted = (int *)parse->value;
   *casted = 1;
   return (0);

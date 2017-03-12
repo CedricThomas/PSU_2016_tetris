@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Wed Feb 22 09:16:27 2017 Maxime Jenny
-** Last update Wed Mar  8 20:20:13 2017 
+** Last update Sun Mar 12 14:53:42 2017 
 */
 #include <stdlib.h>
 #include <ncurses.h>
@@ -62,4 +62,5 @@ int		debug_mode(t_tetrimino *form_list, t_game_rules *my_rules)
   my_set_term(&termio);
   while (read(0, &buf, 1) == 0);
   my_reset_term(&termio);
+  return (0);
 }

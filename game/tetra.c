@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Mon Feb 27 22:05:39 2017 Maxime Jenny
-** Last update Thu Mar  2 17:35:31 2017 
+** Last update Sun Mar 12 15:08:14 2017 
 */
 
 #include <unistd.h>
@@ -43,7 +43,7 @@ t_tetrimino		*my_dup_tetri(t_tetrimino tet)
   return (dup);
 }
 
-static t_tetrimino	*roll_a_tetri(t_tetrimino *shape_list, t_tetris *tetris)
+static t_tetrimino	*roll_a_tetri(t_tetrimino *shape_list)
 {
   t_tetrimino		*tetri;
   int			i;
@@ -70,7 +70,7 @@ int		gen_tetri(t_tetris *tetris, t_tetrimino *shape_list)
     {
       if (tetris->next_tetri == NULL)
 	{
-	  if ((tetris->actual_tetri = roll_a_tetri(shape_list, tetris)) == NULL)
+	  if ((tetris->actual_tetri = roll_a_tetri(shape_list)) == NULL)
 	    return (-1);
 	}
       else
@@ -84,7 +84,7 @@ int		gen_tetri(t_tetris *tetris, t_tetrimino *shape_list)
 	tetris->actual_tetri->pos = myvector2i(1, 1);
     }
   if (tetris->next_tetri == NULL)
-    if ((tetris->next_tetri = roll_a_tetri(shape_list, tetris)) == NULL)
+    if ((tetris->next_tetri = roll_a_tetri(shape_list)) == NULL)
       return (-1);
   if (try_tetri(tetris, tetris->actual_tetri))
     tetris->status = 2;
@@ -111,16 +111,15 @@ int		try_tetri(t_tetris *tetris, t_tetrimino *tetri)
 	  jm = j + tetri->pos.x;
 	  im = i + tetri->pos.y;
 	  if (!(im >= 0 && im < map_size.y + 1 && jm >= 0 && jm < map_size.x + 1)
-	      || tetris->map[im][jm] != ' ' && tetri->matrix[i][j] != ' ')
+	      || (tetris->map[im][jm] != ' ' && tetri->matrix[i][j] != ' '))
 	    return (84);
 	}
     }
   return (0);
 }
 
-int	add_to_map(t_tetris *tetris, t_tetrimino *tetri)
+int		add_to_map(t_tetris *tetris, t_tetrimino *tetri)
 {
-  t_vector2i	map_size;
   int		i;
   int		j;
   int		im;
@@ -129,7 +128,6 @@ int	add_to_map(t_tetris *tetris, t_tetrimino *tetri)
   i = -1;
   if (tetri == NULL)
       return (84);
-  map_size = tetris->my_rules->map;
   while (tetri->matrix[++i])
     {
       j = -1;
@@ -145,4 +143,5 @@ int	add_to_map(t_tetris *tetris, t_tetrimino *tetri)
 	    }
 	}
     }
+  return (0);
 }

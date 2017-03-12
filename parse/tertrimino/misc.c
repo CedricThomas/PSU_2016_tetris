@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Wed Feb 22 10:03:46 2017 
-** Last update Wed Feb 22 15:28:22 2017 
+** Last update Sun Mar 12 14:53:15 2017 
 */
 #include <stdlib.h>
 #include <unistd.h>
@@ -24,6 +24,7 @@ int	clean_gnl(int fd)
   while ((s = get_next_line(fd)) != NULL)
     free(s);
   close(fd);
+  return (0);
 }
 
 int	my_len_sum(char **tab)

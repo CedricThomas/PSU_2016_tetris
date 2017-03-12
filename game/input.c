@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Sun Feb 26 13:32:53 2017
-** Last update Thu Mar  2 14:13:29 2017 
+** Last update Sun Mar 12 15:03:32 2017 
 */
 
 #include <unistd.h>
@@ -35,6 +35,16 @@ int		set_input(t_input *my_inputs, t_tetris *tetris)
   my_inputs->fct[3] = &my_drop;
   my_inputs->fct[4] = &my_quit;
   my_inputs->fct[5] = &my_pause;
+  return (0);
+}
+
+static void	free_intput(t_input *my_inputs, int match)
+
+{  if (!match)
+    {
+      free(my_inputs->input);
+      my_inputs->input = NULL;
+    }
 }
 
 int	try_input(t_input *my_inputs, t_tetris *tetris)
@@ -44,14 +54,15 @@ int	try_input(t_input *my_inputs, t_tetris *tetris)
   int	i;
 
   i = -1;
-  if ((match = read(0, buff, 1)) != 0)
+  if ((match = read(0, buff, 1)) != 0 && match != -1)
     {
       buff[match] = 0;
       if ((my_inputs->input = my_strcatdup(my_inputs->input, buff, 1)) == NULL)
 	return (84);
     }
-  match = 0;
-  while (++i < INPUT_NB && my_inputs->input != NULL)
+  if (match != -1)
+    match = 0;
+  while (++i < INPUT_NB && my_inputs->input != NULL && match != -1)
     {
       if (!my_strcmp(my_inputs->sequence[i], my_inputs->input))
 	my_inputs->fct[i](tetris);
@@ -59,11 +70,8 @@ int	try_input(t_input *my_inputs, t_tetris *tetris)
 			   my_strlen(my_inputs->input)))
 	match = 1;
     }
-  if (!match)
-    {
-      free(my_inputs->input);
-      my_inputs->input = NULL;
-    }
+  free_intput(my_inputs, match);
+  return (0);
 }
 
 int	reset_input(t_input *my_inputs)
@@ -71,4 +79,5 @@ int	reset_input(t_input *my_inputs)
   free(my_inputs->sequence);
   free(my_inputs->fct);
   free(my_inputs->input);
+  return (0);
 }
