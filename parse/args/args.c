@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Mon Feb 20 22:23:37 2017
-** Last update Sun Mar 12 14:48:33 2017 
+** Last update Mon Mar 13 17:36:23 2017 Cédric Thomas
 */
 #include <term.h>
 #include <curses.h>
@@ -65,7 +65,7 @@ static int	cmp_args(char **args, int ac,
     {
       exitval = -1;
       j = -1;
-      while (++j < ARGS_VALUES)
+      while (++j < ARGS_VALUES && exitval == -1)
 	if (myparse[j].short_name != NULL &&
 	    !my_strcmp(myparse[j].short_name, args[i]))
 	  exitval = prepare_short(&myparse[j], args, &i, fct);
