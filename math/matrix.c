@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Wed Feb 22 15:21:00 2017
-** Last update Wed Mar 15 17:33:52 2017 
+** Last update Wed Mar 15 17:52:53 2017 
 */
 #include <stdlib.h>
 #include "my_printf.h"
@@ -55,7 +55,7 @@ int	show_tetri(t_matrix *matrix)
 	{
 	  j = -1;
 	  while (is_in('*', matrix->matrix[i] + ++j))
-	    my_putchar(matrix->matrix[i][j)];
+	    my_putchar(matrix->matrix[i][j]);
 	  my_putchar('\n');
 	}
     }
