@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Wed Feb 22 15:21:00 2017
-** Last update Thu Mar  2 16:41:04 2017 
+** Last update Wed Mar 15 17:33:52 2017 
 */
 #include <stdlib.h>
 #include "my_printf.h"
@@ -42,12 +42,22 @@ int	create_matrix(int x, int y, t_matrix *matrix)
 
 int	show_tetri(t_matrix *matrix)
 {
+  int	i;
+  int	j;
+
+  i = -1;
   my_printf("Tetriminos : Name %s : ", matrix->name);
   if (matrix->valid)
     {
       my_printf("Size %d*%d : Color %d :\n",
 		matrix->size.x, matrix->size.y, matrix->color);
-      my_show_wordtab(matrix->matrix);
+      while (matrix->matrix[++i])
+	{
+	  j = -1;
+	  while (is_in('*', matrix->matrix[i] + ++j))
+	    my_putchar(matrix->matrix[i][j)];
+	  my_putchar('\n');
+	}
     }
   else
     {

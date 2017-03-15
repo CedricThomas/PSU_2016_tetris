@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Tue Feb 21 15:00:13 2017 
-** Last update Sun Mar 12 14:51:17 2017 
+** Last update Wed Mar 15 17:50:17 2017 
 */
 #include <curses.h>
 #include <stdlib.h>
@@ -48,7 +48,7 @@ int	parse_value(t_parse *parse, char *value)
   if (*casted != -1)
     return (invalid_parse(parse, "the value as already been set"));
   if (is_an_int(value))
-    return (invalid_parse(parse, "invalid value"));
+   return (invalid_parse(parse, "invalid value"));
   *casted = my_getnbr(value);
   if (*casted <= 0 || *casted > 10)
     return (invalid_parse(parse, "the value must be between 0 and 10"));
@@ -62,6 +62,8 @@ int	parse_key(t_parse *parse, char *value)
   casted = (char **)parse->value;
   if (*casted != NULL)
     return (invalid_parse(parse, "the value as already been set"));
+  if (my_strlen(value) <= 0)
+    return (invalid_parse(parse, "invalid value"));
   if ((*casted = my_strdup(value)) == NULL)
     return (84);
   return (0);
