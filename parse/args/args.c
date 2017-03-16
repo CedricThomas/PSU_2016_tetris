@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Mon Feb 20 22:23:37 2017
-** Last update Mon Mar 13 17:36:23 2017 Cédric Thomas
+** Last update Thu Mar 16 12:04:55 2017 Cédric Thomas
 */
 #include <term.h>
 #include <curses.h>
@@ -14,7 +14,7 @@
 #include "my_printf.h"
 #include "tetris.h"
 
-static t_parse	myparse[ARGS_VALUES] =
+static t_parse	g_myparse[ARGS_VALUES] =
   {
     {"-l", "--level", NULL, 0},
     {"-kl", "--key-left", NULL, 0},
@@ -30,26 +30,26 @@ static t_parse	myparse[ARGS_VALUES] =
 
 static void	link_pointers(t_game_rules *my_rules)
 {
-  myparse[0].value = &(my_rules->level);
-  myparse[0].type = PVALUE;
-  myparse[1].value = &(my_rules->mkey_left);
-  myparse[1].type = PKEY;
-  myparse[2].value = &(my_rules->mkey_right);
-  myparse[2].type = PKEY;
-  myparse[3].value = &(my_rules->mkey_turn);
-  myparse[3].type = PKEY;
-  myparse[4].value = &(my_rules->mkey_drop);
-  myparse[4].type = PKEY;
-  myparse[5].value = &(my_rules->mkey_quit);
-  myparse[5].type = PKEY;
-  myparse[6].value = &(my_rules->mkey_pause);
-  myparse[6].type = PKEY;
-  myparse[7].value = &(my_rules->map);
-  myparse[7].type = PVECTOR;
-  myparse[8].value = &(my_rules->next);
-  myparse[8].type = PBOOLEAN;
-  myparse[9].value = &(my_rules->debug);
-  myparse[9].type = PBOOLEAN;
+  g_myparse[0].value = &(my_rules->level);
+  g_myparse[0].type = PVALUE;
+  g_myparse[1].value = &(my_rules->mkey_left);
+  g_myparse[1].type = PKEY;
+  g_myparse[2].value = &(my_rules->mkey_right);
+  g_myparse[2].type = PKEY;
+  g_myparse[3].value = &(my_rules->mkey_turn);
+  g_myparse[3].type = PKEY;
+  g_myparse[4].value = &(my_rules->mkey_drop);
+  g_myparse[4].type = PKEY;
+  g_myparse[5].value = &(my_rules->mkey_quit);
+  g_myparse[5].type = PKEY;
+  g_myparse[6].value = &(my_rules->mkey_pause);
+  g_myparse[6].type = PKEY;
+  g_myparse[7].value = &(my_rules->map);
+  g_myparse[7].type = PVECTOR;
+  g_myparse[8].value = &(my_rules->next);
+  g_myparse[8].type = PBOOLEAN;
+  g_myparse[9].value = &(my_rules->debug);
+  g_myparse[9].type = PBOOLEAN;
 }
 
 static int	cmp_args(char **args, int ac,
@@ -66,12 +66,12 @@ static int	cmp_args(char **args, int ac,
       exitval = -1;
       j = -1;
       while (++j < ARGS_VALUES && exitval == -1)
-	if (myparse[j].short_name != NULL &&
-	    !my_strcmp(myparse[j].short_name, args[i]))
-	  exitval = prepare_short(&myparse[j], args, &i, fct);
-	else if (!my_strncmp(myparse[j].long_name, args[i],
-			     my_strlen(myparse[j].long_name)))
-	  exitval = prepare_long(&myparse[j], args, &i, fct);
+	if (g_myparse[j].short_name != NULL &&
+	    !my_strcmp(g_myparse[j].short_name, args[i]))
+	  exitval = prepare_short(&g_myparse[j], args, &i, fct);
+	else if (!my_strncmp(g_myparse[j].long_name, args[i],
+			     my_strlen(g_myparse[j].long_name)))
+	  exitval = prepare_long(&g_myparse[j], args, &i, fct);
     }
   if (exitval)
     {
@@ -92,9 +92,9 @@ static int	check_new_rules()
     {
       j = 0;
       while (++j < 7)
-	if (i != j && !my_strncmp(*((char **)myparse[i].value),
-				  *((char **)myparse[j].value),
-				  my_strlen(*((char **)myparse[i].value))))
+	if (i != j && !my_strncmp(*((char **)g_myparse[i].value),
+				  *((char **)g_myparse[j].value),
+				  my_strlen(*((char **)g_myparse[i].value))))
 	  {
 	    my_puterror("Error : severals sequences start with the same values\n");
 	    return (84);

@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Wed Feb 22 09:16:27 2017 Maxime Jenny
-** Last update Thu Mar 16 10:33:54 2017 Cédric Thomas
+** Last update Thu Mar 16 12:03:22 2017 Cédric Thomas
 */
 #include <stdlib.h>
 #include <ncurses.h>
@@ -15,14 +15,6 @@
 #include "my.h"
 #include "my_printf.h"
 
-static char	*check_str(char *str)
-{
-  if (!my_strcmp(str, " "))
-    return ("(space)");
-  else
-    return (str);
-}
-
 static void	print_key(char *key, char *value)
 {
   int		i;
@@ -31,8 +23,10 @@ static void	print_key(char *key, char *value)
   my_printf("Key %s :  ", key);
   while (value[++i])
     {
-      if (value[i] == 27)
+      if (value[i] == '\e')
 	my_putstr("^E");
+      else if (value[i] == ' ')	
+	my_putstr("(space)");
       else
 	my_putchar(value[i]);
     }
@@ -46,12 +40,12 @@ int		debug_mode(t_tetrimino *form_list, t_game_rules *my_rules)
   char		buf;
 
   my_printf("*** DEBUG MODE ***\n");
-  print_key("Left", check_str(my_rules->mkey_left));
-  print_key("Right", check_str(my_rules->mkey_right));
-  print_key("Turn", check_str(my_rules->mkey_turn));
-  print_key("Drop", check_str(my_rules->mkey_drop));
-  print_key("Quit", check_str(my_rules->mkey_quit));
-  print_key("Pause", check_str(my_rules->mkey_pause));
+  print_key("Left", my_rules->mkey_left);
+  print_key("Right", my_rules->mkey_right);
+  print_key("Turn", my_rules->mkey_turn);
+  print_key("Drop", my_rules->mkey_drop);
+  print_key("Quit", my_rules->mkey_quit);
+  print_key("Pause", my_rules->mkey_pause);
   my_printf("Next :  %s\n", my_rules->next ? ("Yes") : ("No"));
   my_printf("Level :  %d\n", my_rules->level);
   my_printf("Size :  %d*%d\n", my_rules->map.y, my_rules->map.x);
