@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Sat Feb 25 19:07:15 2017
-** Last update Sun Mar 12 14:55:34 2017 
+** Last update Thu Mar 16 10:06:21 2017 Cédric Thomas
 */
 #include <stdlib.h>
 #include "tetris.h"
@@ -98,7 +98,7 @@ int		auto_drop(t_tetris *tetris)
 {
   if (tetris->actual_tetri == NULL)
     return (84);
-  if (tetris->cycle <= CYCLE_MAX - tetris->my_rules->level * CYCLE_ADD)
+  if (tetris->cycle <= CYCLE_MAX / (tetris->my_rules->level * CYCLE_ADD))
     tetris->cycle++;
   else
     {

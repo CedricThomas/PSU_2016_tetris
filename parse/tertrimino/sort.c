@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Fri Feb 24 21:05:11 2017
-** Last update Wed Mar  8 11:35:33 2017 
+** Last update Thu Mar 16 10:32:44 2017 
 */
 #include <term.h>
 #include <curses.h>
@@ -74,6 +74,8 @@ int		check_tetri(t_tetrimino **shape_list, t_game_rules *rules)
 	    (*shape_list)[i].valid = 0;
 	  else if ((*shape_list)[i].color > NB_COLORS)
 	    (*shape_list)[i].color %= NB_COLORS;
+	  if (has_colors())
+	    (*shape_list)[i].color = 0;
 	  if ((*shape_list)[i].size.x > vec.x ||
 	      (*shape_list)[i].size.y > vec.y)
 	    (*shape_list)[i].valid = 0;
