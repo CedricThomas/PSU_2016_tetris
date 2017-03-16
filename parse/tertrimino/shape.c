@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 ** 
 ** Started on  Wed Feb 22 13:41:55 2017 
-** Last update Sun Mar 12 15:04:53 2017 
+** Last update Thu Mar 16 11:44:59 2017 Cédric Thomas
 */
 #include <stdlib.h>
 #include "my.h"
@@ -92,7 +92,7 @@ int		fill_shape(int fd, char **header,
   size_w = circle_width(tab);
   size_h = circle_height(tab);
   if (size_w.y - size_w.x + 1 != (*shape_list)[index].size.x ||
-      size_h.y - size_h.x + 1 != (*shape_list)[index].size.y)
+      size_h.y - size_h.x + 1 != (*shape_list)[index].size.y || size_w.x < 0)
     return (84);
   i = -1;
   while (++i + size_h.x <= size_h.y)

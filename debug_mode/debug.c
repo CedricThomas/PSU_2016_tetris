@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Wed Feb 22 09:16:27 2017 Maxime Jenny
-** Last update Thu Mar 16 09:47:45 2017 Cédric Thomas
+** Last update Thu Mar 16 10:33:54 2017 Cédric Thomas
 */
 #include <stdlib.h>
 #include <ncurses.h>
