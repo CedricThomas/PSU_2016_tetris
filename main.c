@@ -5,7 +5,7 @@
 ** Login   <cedric.thomas@epitech.eu>
 **
 ** Started on  Wed Feb 22 09:46:31 2017
-** Last update Thu Mar  2 20:58:14 2017 
+** Last update Sat Mar 18 15:38:25 2017 
 */
 
 #include <stdlib.h>
@@ -42,8 +42,11 @@ int	help(int jump, char *name)
   return (0);
 }
 
-static void	  my_free_rule(t_game_rules *my_rules, t_tetris tetris)
+static void	my_free_rule(t_game_rules *my_rules,
+			     t_tetris tetris, t_tetrimino *shape_list)
 {
+  int		i;
+
   free(my_rules->mkey_left);
   free(my_rules->mkey_right);
   free(my_rules->mkey_turn);
@@ -51,6 +54,15 @@ static void	  my_free_rule(t_game_rules *my_rules, t_tetris tetris)
   free(my_rules->mkey_quit);
   free(my_rules->mkey_pause);
   free_tab(tetris.map);
+  free_tetri(tetris.actual_tetri);
+  free_tetri(tetris.next_tetri);
+  free(tetris.t);
+  i = -1;
+  while (shape_list[++i].name != NULL)
+    {
+      free_tab(shape_list[i].matrix);
+      free(shape_list[i].name);
+    }
 }
 
 int		main(int ac, char **av)
@@ -77,7 +89,7 @@ int		main(int ac, char **av)
   tetris.score = 0;
   the_game(&tetris, shape_list);
   endwin();
-  my_free_rule(&my_rules, tetris);
+  my_free_rule(&my_rules, tetris, shape_list);
   free(shape_list);
   return (0);
 }

@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Wed Feb 22 09:16:27 2017 Maxime Jenny
-** Last update Thu Mar 16 12:03:22 2017 Cédric Thomas
+** Last update Sat Mar 18 15:38:08 2017 
 */
 #include <stdlib.h>
 #include <ncurses.h>
@@ -25,7 +25,7 @@ static void	print_key(char *key, char *value)
     {
       if (value[i] == '\e')
 	my_putstr("^E");
-      else if (value[i] == ' ')	
+      else if (value[i] == ' ')
 	my_putstr("(space)");
       else
 	my_putchar(value[i]);

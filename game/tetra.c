@@ -5,7 +5,7 @@
 ** Login   <maxime.jenny@epitech.eu@epitech.eu>
 **
 ** Started on  Mon Feb 27 22:05:39 2017 Maxime Jenny
-** Last update Thu Mar 16 14:36:30 2017 Maxime Jenny
+** Last update Thu Mar 16 14:21:58 2017 Cédric Thomas
 */
 
 #include <unistd.h>
@@ -34,6 +34,8 @@ t_tetrimino		*my_dup_tetri(t_tetrimino tet)
   while (tet.matrix[y] != NULL)
     {
       dup->matrix[y] = my_strdup(tet.matrix[y]);
+      if (dup->matrix[y] == NULL)
+	return (NULL);
       y++;
     }
   dup->matrix[y] = NULL;
